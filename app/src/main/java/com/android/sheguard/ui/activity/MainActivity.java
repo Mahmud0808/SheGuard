@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         binding.helpline.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, HelplineActivity.class)));
         binding.settings.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
         binding.safetyTips.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SafetyTipsActivity.class)));
+        binding.about.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AboutActivity.class)));
     }
 
     private final ActivityResultLauncher<String[]> multiplePermissions = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {

@@ -46,6 +46,9 @@
     <string name="activity_safety_tips_title">Safety tips</string>
     <string name="activity_safety_tips_desc">Access a wealth of safety resources</string>
 
+    <string name="activity_about_title">About</string>
+    <string name="activity_about_desc">Learn more about our mission</string>
+
     <string name="safety_tips_tip_1">Be Alert! Scan the area as you walk. Be aware of your surroundings and walk with confidence.</string>
     <string name="safety_tips_tip_2">Avoid shopping alone. Try to shop with a friend or relative.</string>
     <string name="safety_tips_tip_3">Know your surroundings. Keep an eye on the people in front of you as well as behind you.</string>
