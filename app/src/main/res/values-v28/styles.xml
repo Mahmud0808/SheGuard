@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MaterialComponents.MaterialAlertDialog" parent="MaterialAlertDialog.Material3">
+        <item name="android:background">@drawable/container</item>
+        <item name="android:dialogCornerRadius">@dimen/component_corner_radius</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+</resources>

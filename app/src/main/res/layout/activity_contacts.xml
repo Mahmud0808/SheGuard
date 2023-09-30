@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activity.ContactsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="16dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_add_name_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="4dp"
+                    app:boxCornerRadiusBottomEnd="@dimen/component_corner_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/component_corner_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/component_corner_radius"
+                    app:boxCornerRadiusTopStart="@dimen/component_corner_radius"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_name_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_add_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Full name"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPersonName"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_add_number_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="4dp"
+                    app:boxCornerRadiusBottomEnd="@dimen/component_corner_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/component_corner_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/component_corner_radius"
+                    app:boxCornerRadiusTopStart="@dimen/component_corner_radius"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_call_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_add_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone number"
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@android:string/untitled"
+                    android:minHeight="@dimen/button_height"
+                    android:text="Add contact"
+                    android:textSize="16sp"
+                    app:cornerRadius="@dimen/component_corner_radius"
+                    app:icon="@drawable/ic_done"
+                    app:iconGravity="textStart" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_empty_list"
+                    style="@style/TextAppearance.Material3.BodyMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:text="Contact list is empty"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/view_header_expandable" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

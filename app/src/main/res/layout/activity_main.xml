@@ -1,18 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:clipChildren="false"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="28dp"
+                android:background="@drawable/btn_large_sos"
+                android:elevation="12dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="168dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="-4"
+                    android:shadowRadius="4"
+                    android:text="SOS"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnError"
+                    android:textSize="60sp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingHorizontal="80dp"
+                android:paddingVertical="16dp"
+                android:text="Start"
+                android:textSize="16sp"
+                app:cornerRadius="@dimen/component_corner_radius" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/stop_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="80dp"
+                android:paddingVertical="16dp"
+                android:text="Stop"
+                android:textSize="16sp"
+                app:cornerRadius="@dimen/component_corner_radius" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/profile"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/container"
+                    android:baselineAligned="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:paddingVertical="15.0dip"
+                    android:paddingStart="20.0dip"
+                    android:paddingEnd="20.0dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Profile"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:text="Manage your account informations"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="15sp"
+                        tools:ignore="NestedWeights" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="start|bottom"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:contentDescription="@android:string/untitled"
+                        android:src="@drawable/ic_profile"
+                        app:tint="?attr/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/contacts"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/container"
+                    android:baselineAligned="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:paddingVertical="15.0dip"
+                    android:paddingStart="20.0dip"
+                    android:paddingEnd="20.0dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Contacts"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:text="Quick access to trusted contacts"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="15sp"
+                        tools:ignore="NestedWeights" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="start|bottom"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:contentDescription="@android:string/untitled"
+                        android:src="@drawable/ic_contacts"
+                        app:tint="?attr/colorPrimary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/helpline"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/container"
+                    android:baselineAligned="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:paddingVertical="15.0dip"
+                    android:paddingStart="20.0dip"
+                    android:paddingEnd="20.0dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Helpline"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:text="Support from local authorities"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="15sp"
+                        tools:ignore="NestedWeights" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="start|bottom"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:contentDescription="@android:string/untitled"
+                        android:src="@drawable/ic_helpline"
+                        app:tint="?attr/colorPrimary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/settings"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/container"
+                    android:baselineAligned="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:paddingVertical="15.0dip"
+                    android:paddingStart="20.0dip"
+                    android:paddingEnd="20.0dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Settings"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:text="Customize your safety experience"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="15sp"
+                        tools:ignore="NestedWeights" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="start|bottom"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:contentDescription="@android:string/untitled"
+                        android:src="@drawable/ic_settings"
+                        app:tint="?attr/colorPrimary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/safety_tips"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/container"
+                    android:baselineAligned="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:paddingVertical="15.0dip"
+                    android:paddingStart="20.0dip"
+                    android:paddingEnd="20.0dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Safety tips"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:text="Access a wealth of safety resources"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="15sp"
+                        tools:ignore="NestedWeights" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="start|bottom"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:contentDescription="@android:string/untitled"
+                        android:src="@drawable/ic_safety_tips"
+                        app:tint="?attr/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/about"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/container"
+                    android:baselineAligned="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:paddingVertical="15.0dip"
+                    android:paddingStart="20.0dip"
+                    android:paddingEnd="20.0dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="About"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:text="Learn more about our mission"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="15sp"
+                        tools:ignore="NestedWeights" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="start|bottom"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:contentDescription="@android:string/untitled"
+                        android:src="@drawable/ic_about"
+                        app:tint="?attr/colorPrimary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/view_header_expandable" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

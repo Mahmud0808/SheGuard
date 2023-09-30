@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingVertical="16dp">
+
+    <View
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/container"
+        android:backgroundTint="?attr/colorPrimary" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
+        style="@style/TextAppearance.Material3.BodyMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
+        android:layout_marginVertical="4dp"
+        android:layout_marginEnd="24dp"
+        android:layout_weight="1"
+        android:justificationMode="inter_word"
+        android:textColor="@color/text_color_secondary"
+        android:textSize="15sp" />
+
+</LinearLayout>

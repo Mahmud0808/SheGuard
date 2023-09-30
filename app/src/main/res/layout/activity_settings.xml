@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activity.SettingsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <RelativeLayout
+                android:id="@+id/shake_detection_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background_material"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/ic_shake_detection"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:contentDescription="@android:string/untitled"
+                    android:src="@drawable/ic_shake_detection"
+                    app:tint="?attr/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginVertical="22dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@id/switch_shake_detection"
+                    android:layout_toEndOf="@id/ic_shake_detection"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shake detection"
+                        android:textColor="@color/text_color_primary" />
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send SOS when you shake your phone. This may be unreliable."
+                        android:textColor="@color/text_color_secondary" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_shake_detection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp"
+                    android:checked="false" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/send_sms_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background_material"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/iv_send_sms"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:contentDescription="@android:string/untitled"
+                    android:src="@drawable/ic_send_sms"
+                    app:tint="?attr/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginVertical="22dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@id/switch_send_sms"
+                    android:layout_toEndOf="@id/iv_send_sms"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send SMS"
+                        android:textColor="@color/text_color_primary" />
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Use SMS service to send SOS. Carrier charges may apply."
+                        android:textColor="@color/text_color_secondary" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_send_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/send_notification_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background_material"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/iv_send_notification"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:contentDescription="@android:string/untitled"
+                    android:src="@drawable/ic_send_notification"
+                    app:tint="?attr/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginVertical="22dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@id/switch_send_notification"
+                    android:layout_toEndOf="@id/iv_send_notification"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send notification"
+                        android:textColor="@color/text_color_primary" />
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Use Notification service to send SOS. Your contacts must have account."
+                        android:textColor="@color/text_color_secondary" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_send_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/play_siren_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background_material"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/iv_play_siren"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:contentDescription="@android:string/untitled"
+                    android:src="@drawable/ic_play_siren"
+                    app:tint="?attr/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginVertical="22dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@id/switch_play_siren"
+                    android:layout_toEndOf="@id/iv_play_siren"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Play siren"
+                        android:textColor="@color/text_color_primary" />
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Play fake police siren at full volume in emergency mode."
+                        android:textColor="@color/text_color_secondary" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_play_siren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/call_emergency_service_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_background_material"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/iv_call_emergency_service"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:contentDescription="@android:string/untitled"
+                    android:src="@drawable/ic_call_emergency_service"
+                    app:tint="?attr/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginVertical="22dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@id/switch_call_emergency_service"
+                    android:layout_toEndOf="@id/iv_call_emergency_service"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Call emergency service"
+                        android:textColor="@color/text_color_primary" />
+
+                    <TextView
+                        style="@style/TextAppearance.Material3.BodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Automatically call national emergency service in emergency mode."
+                        android:textColor="@color/text_color_secondary" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_call_emergency_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/view_header_expandable" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

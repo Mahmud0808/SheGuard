@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="shadow">#66000000</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#4CAF50</color>
+    <color name="colorPurple">#6c63ff</color>
+    <color name="colorIndigo">#303F9F</color>
+    <color name="colorBlueMidnight">#003366</color>
+    <color name="colorGrey">#C9C9C9</color>
+    <color name="textColorPrimary">#FF000000</color>
+    <color name="textColorSecondary">#CC000000</color>
+    <color name="login_bg">#DFF2F6</color>
 </resources>

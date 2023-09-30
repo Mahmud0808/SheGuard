@@ -1,3 +1,70 @@
 <resources>
     <string name="app_name">SheGuard</string>
+    <string name="app_moto">Your safety in your hands</string>
+
+    <string name="onboarding_slide1_title">Welcome to SheGuard</string>
+    <string name="onboarding_slide1_subtitle">Your personal guardian app for women\'s safety</string>
+    <string name="onboarding_slide1_desc">SheGuard empowers and protects you. Let\'s start your journey toward safety and peace of mind.</string>
+
+    <string name="onboarding_slide2_title">Your Safety, Your Way</string>
+    <string name="onboarding_slide2_subtitle">Customized protection at your fingertips</string>
+    <string name="onboarding_slide2_desc">Tailor SheGuard to your preferences, choosing the features that matter most.</string>
+
+    <string name="onboarding_slide3_title">A Supportive Community</string>
+    <string name="onboarding_slide3_subtitle">Be more independent and feel the happiness</string>
+    <string name="onboarding_slide3_desc">Join our community of strong women, access resources, and stand together for safety and empowerment.</string>
+
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="get_started">Get started</string>
+
+    <string name="email_verification">Please verify your email</string>
+    <string name="email_verification_description"><![CDATA[You\'re almost there! We sent an email to <b>%s</b><br /><br />Just click on the link in that email to complete your signup. If you don\'t see it, you may need to <b>check your spam</b> folder.]]></string>
+
+    <string name="email_reset">Please check your email</string>
+    <string name="email_reset_description"><![CDATA[You\'re almost there! We sent an email to <b>%s</b><br /><br />Just click on the link in that email to reset your password. If you don\'t see it, you may need to <b>check your spam</b> folder.]]></string>
+
+    <string name="notification_channel_push">Push notification</string>
+    <string name="notification_channel_push_desc">Push notification</string>
+    <string name="notification_channel_emergency">Emergency mode</string>
+    <string name="notification_channel_emergency_desc">Emergency alert service</string>
+
+    <string name="notification_emergency_mode">%s is now in Emergency Mode</string>
+
+    <string name="activity_home_title">Welcome</string>
+    <string name="activity_home_desc">%s!</string>
+
+    <string name="activity_contacts_title">Contacts</string>
+    <string name="activity_contacts_desc">Quick access to trusted contacts</string>
+
+    <string name="activity_helpline_title">Helpline</string>
+    <string name="activity_helpline_desc">Support from local authorities</string>
+
+    <string name="activity_settings_title">Settings</string>
+    <string name="activity_settings_desc">Customize your safety experience</string>
+
+    <string name="activity_safety_tips_title">Safety tips</string>
+    <string name="activity_safety_tips_desc">Access a wealth of safety resources</string>
+
+    <string name="safety_tips_tip_1">Be Alert! Scan the area as you walk. Be aware of your surroundings and walk with confidence.</string>
+    <string name="safety_tips_tip_2">Avoid shopping alone. Try to shop with a friend or relative.</string>
+    <string name="safety_tips_tip_3">Know your surroundings. Keep an eye on the people in front of you as well as behind you.</string>
+    <string name="safety_tips_tip_4">Carry your purse close to your body and do not leave it unattended.</string>
+    <string name="safety_tips_tip_5">Try not to carry too many packages. Place all packages out of sight in your vehicle, preferably in the trunk.</string>
+    <string name="safety_tips_tip_6">Park your vehicle in a well-lighted area. Even in daylight hours, you may want to park near a light pole so if you leave when it is darker, your car will be in a well-lit location.</string>
+    <string name="safety_tips_tip_7">Approach your vehicle with your keys already in your hand. Keep your vehicle doors locked and your windows shut.  Look around, under and in your car, especially the back seat, before you get in.</string>
+    <string name="safety_tips_tip_8">When leaving a business late at night, (if available) ask a security guard to walk you to your car. Do not go up to just any security guard. Go directly to the kiosk and ask for them to assign an officer to escort you. Predators sometimes dress up to resemble security or other authority figures.</string>
+    <string name="safety_tips_tip_9">When a business requests you to confirm your home address, whisper it to them. Broadcasting your home address among strangers in the line could compromise your safety.</string>
+    <string name="safety_tips_tip_10">When checking into a hotel room, if the person at the front desk says your room number out loud, ask them to give you a new room and write the number on a piece of paper. Or when you check-in, ask up front to not say your room number out loud. Your room number should be your business only.</string>
+    <string name="safety_tips_tip_11">Before entering your hotel room, make sure no one is lingering in the hallway.</string>
+    <string name="safety_tips_tip_12">Always immediately lock your hotel room door after you enter.</string>
+    <string name="safety_tips_tip_13">If you call for room service, and you get a knock on your door, do not immediately open the door. Ask: "Who is it?" Make the person on the other side of the door tell you who they are before you open it. If in doubt do not open the door and call the front desk.</string>
+    <string name="safety_tips_tip_14">When asking for directions and someone offers to show you the way by having you follow them, do not go. Just ask for them to point you in the right direction. Often, predators just want to lure you to a place less crowded where your calls for help can\'t be heard.</string>
+    <string name="safety_tips_tip_15">Always pour your own drink at a party and bring it with you everywhere…even to the bathroom. This will make it more difficult for someone to drug you via your drink.</string>
+    <string name="safety_tips_tip_16">If you choose to partake in drinking alcohol, remember to have a designated driver.</string>
+    <string name="safety_tips_tip_17">Watch the bartender as he or she pours your drink. To be extra safe, drink wine instead of a cocktail. Mixed drinks take longer to make. You could be easily distracted and miss the bartender  (who could be working with a predator) or someone else placing something in your drink.</string>
+    <string name="safety_tips_tip_18">When going out with your friends, decide beforehand you will stick together. Do not let your friend go off alone with any person.</string>
+    <string name="safety_tips_tip_19">Don\'t check-in on social media apps when you arrive somewhere. Instead, check in as you leave. This way no one will be able to digitally stalk you and know your every move or when you\'re not at home. Along the same lines, avoid tweeting or using Facebook from vacation, especially if your account is public, as it is a way of letting the world know your home is unoccupied.</string>
+    <string name="safety_tips_tip_20">When you move into a new residence, check areas for possible hidden cameras. Your landlord, previous tenant or previous owner could be spying on you.</string>
+    <string name="safety_tips_tip_21">Unfortunately, no matter how diligently we practice awareness and avoidance techniques, we may find ourselves in a physical confrontation. If available, it is suggested to take self defense training.</string>
 </resources>
