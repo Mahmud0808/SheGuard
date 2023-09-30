@@ -23,12 +23,24 @@
             android:paddingTop="36dp"
             android:paddingBottom="40dp">
 
-            <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_marginBottom="28dp"
-                android:contentDescription="@android:string/untitled"
-                android:src="@mipmap/ic_launcher_round" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    android:src="@drawable/ic_launcher_foreground" />
+
+            </FrameLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.Material3.TitleLarge"
