@@ -10,7 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.telephony.SmsManager;
@@ -27,22 +31,25 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.seismic.ShakeDetector;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SosService extends Service implements ShakeDetector.Listener {
+@SuppressWarnings("FieldCanBeLocal")
+public class SosService extends Service implements SensorEventListener {
 
     String myLocation = "";
     private boolean isRunning = false;
-    private SensorManager sensorManager = null;
-    private final ShakeDetector shakeDetector = new ShakeDetector(this);
     private final SmsManager manager = SmsManager.getDefault();
     private FusedLocationProviderClient fusedLocationClient;
     static final MediaPlayer mediaPlayer = new MediaPlayer();
+    public static final int MIN_TIME_BETWEEN_SHAKES = 1000;
+    private final Float shakeThreshold = 10.2f;
+    private SensorManager sensorManager = null;
+    private AudioManager audioManager = null;
+    private long lastShakeTime = 0;
 
     @Nullable
     @Override
@@ -73,6 +80,12 @@ public class SosService extends Service implements ShakeDetector.Listener {
                 });
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+
+        if (sensorManager != null) {
+            Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            sensorManager.registerListener((SensorEventListener) this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
     @Override
@@ -83,7 +96,6 @@ public class SosService extends Service implements ShakeDetector.Listener {
                     this.stopForeground(true);
                     this.stopSelf();
                     stopSiren();
-                    shakeDetector.stop();
                     isRunning = false;
                 }
             } else {
@@ -101,14 +113,13 @@ public class SosService extends Service implements ShakeDetector.Listener {
                 Notification notification = new Notification.Builder(this, getString(R.string.notification_channel_emergency))
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(getString(R.string.notification_emergency_mode, getString(R.string.app_name)))
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
+                        .setSmallIcon(R.drawable.ic_launcher_notification)
                         .setContentIntent(pendingIntent)
                         .setOngoing(true)
                         .build();
 
                 this.startForeground(1, notification);
                 notificationManager.notify(1, notification);
-                shakeDetector.start(sensorManager);
                 isRunning = true;
                 return START_NOT_STICKY;
             }
@@ -117,43 +128,36 @@ public class SosService extends Service implements ShakeDetector.Listener {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public void updateLocation() {
-        try {
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        } catch (Exception ignored) {
-        }
-    }
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            long curTime = System.currentTimeMillis();
+            if ((curTime - lastShakeTime) > MIN_TIME_BETWEEN_SHAKES) {
 
-    public void sendSMS(ArrayList<String> contacts) {
-        for (String contact : contacts) {
-            manager.sendTextMessage(contact, null, "I'm in Trouble!\nMy Location:\n" + myLocation, null, null);
-        }
-    }
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
 
-    public void playSiren() {
-        try {
-            AssetFileDescriptor afd = getAssets().openFd("police-operation-siren.mp3");
-            mediaPlayer.setDataSource(afd.getFileDescriptor());
-            mediaPlayer.prepare();
-            mediaPlayer.setVolume(1f, 1f);
-            mediaPlayer.setLooping(true);
-            mediaPlayer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+                double acceleration = Math.sqrt(Math.pow(x, 2) +
+                        Math.pow(y, 2) +
+                        Math.pow(z, 2)) - SensorManager.GRAVITY_EARTH;
 
-    public static void stopSiren() {
-        try {
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-        } catch (Exception ignored) {
+                if (acceleration > shakeThreshold) {
+                    lastShakeTime = curTime;
+                    deviceShaken();
+                }
+            }
         }
     }
 
     @Override
-    public void hearShake() {
-        if (Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false)) {
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // do nothing
+    }
+
+    private void deviceShaken() {
+        if (!Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false)) {
+            stopSiren();
             return;
         }
 
@@ -178,5 +182,44 @@ public class SosService extends Service implements ShakeDetector.Listener {
         }
 
         Log.i("ShakeDetector", "Shake Detected");
+    }
+
+    public void updateLocation() {
+        try {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public void sendSMS(ArrayList<String> contacts) {
+        for (String contact : contacts) {
+            manager.sendTextMessage(contact, null, "I'm in Trouble!\nMy Location:\n" + myLocation, null, null);
+        }
+    }
+
+    public void playSiren() {
+        if (mediaPlayer.isPlaying()) {
+            return;
+        }
+
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("police-operation-siren.mp3");
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            mediaPlayer.prepare();
+            mediaPlayer.setVolume(1f, 1f);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void stopSiren() {
+        try {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+        } catch (Exception ignored) {
+        }
     }
 }

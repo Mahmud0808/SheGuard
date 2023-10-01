@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         binding.stopService.setOnClickListener(v -> {
             Intent notificationIntent = new Intent(MainActivity.this, SosService.class);
             notificationIntent.setAction("STOP");
+            SosService.stopSiren();
 
             getApplicationContext().startForegroundService(notificationIntent);
             Snackbar.make(findViewById(android.R.id.content), "Service Stopped!", Snackbar.LENGTH_LONG).show();

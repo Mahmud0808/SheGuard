@@ -59,7 +59,7 @@
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Send SOS when you shake your phone. This may be unreliable."
+                        android:text="Send SOS when you shake your phone. This requires accelerometer sensor."
                         android:textColor="@color/text_color_secondary" />
 
                 </LinearLayout>
