@@ -133,18 +133,26 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void startSosService() {
-        Intent notificationIntent = new Intent(HomeActivity.this, SosService.class);
-        notificationIntent.setAction("START");
+        try {
+            Intent notificationIntent = new Intent(HomeActivity.this, SosService.class);
+            notificationIntent.setAction("START");
 
-        getApplicationContext().startForegroundService(notificationIntent);
+            getApplicationContext().startForegroundService(notificationIntent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void stopSosService() {
-        Intent notificationIntent = new Intent(HomeActivity.this, SosService.class);
-        notificationIntent.setAction("STOP");
-        SosService.stopSiren();
+        try {
+            Intent notificationIntent = new Intent(HomeActivity.this, SosService.class);
+            notificationIntent.setAction("STOP");
+            SosService.stopSiren();
 
-        getApplicationContext().startForegroundService(notificationIntent);
+            getApplicationContext().startForegroundService(notificationIntent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateButtonText() {
