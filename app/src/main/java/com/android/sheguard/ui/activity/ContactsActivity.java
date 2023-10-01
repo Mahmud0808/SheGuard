@@ -103,6 +103,10 @@ public class ContactsActivity extends AppCompatActivity {
                 .setMessage("Are you sure you want to remove this contact?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> {
+                    if (contacts.size() == 0) {
+                        return;
+                    }
+
                     contacts.remove(idx);
                     adapter.notifyDataSetChanged();
 

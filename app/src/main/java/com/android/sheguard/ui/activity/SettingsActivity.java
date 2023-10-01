@@ -31,7 +31,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         binding.switchShakeDetection.setChecked(Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false));
-        binding.switchShakeDetection.setOnCheckedChangeListener((buttonView, isChecked) -> Prefs.putBoolean(Constants.SETTINGS_SHAKE_DETECTION, isChecked));
+        binding.switchShakeDetection.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Prefs.putBoolean(Constants.SETTINGS_SHAKE_DETECTION, isChecked);
+            HomeActivity.shakeDetection.setValue(isChecked);
+        });
         binding.shakeDetectionContainer.setOnClickListener(v -> binding.switchShakeDetection.toggle());
 
         binding.switchSendSms.setChecked(Prefs.getBoolean(Constants.SETTINGS_SEND_SMS, true));

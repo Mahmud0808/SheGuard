@@ -30,6 +30,11 @@
     <string name="notification_channel_emergency_desc">Emergency alert service</string>
 
     <string name="notification_emergency_mode">%s is now in Emergency Mode</string>
+    <string name="sos_message">Hey %s,\nI\'m in Danger!\nMy location: %s</string>
+    <string name="sos_notification">I\'m in Danger! My location: %s</string>
+
+    <string name="btn_start_service">Start Shake Detection</string>
+    <string name="btn_stop_service">Stop Shake Detection</string>
 
     <string name="activity_home_title">Welcome</string>
     <string name="activity_home_desc">%s!</string>

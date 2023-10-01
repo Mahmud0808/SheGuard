@@ -19,7 +19,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -46,15 +48,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database:20.2.2'
+    implementation 'com.google.firebase:firebase-firestore:24.8.1'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.2.1'
+
     implementation 'com.tbuonomo:dotsindicator:4.3'
-    implementation 'com.airbnb.android:lottie:6.0.1'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
-    implementation 'com.google.firebase:firebase-database:20.2.2'
-    implementation 'com.google.firebase:firebase-analytics:21.3.0'
-    implementation 'com.google.firebase:firebase-firestore:24.8.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.5.0"

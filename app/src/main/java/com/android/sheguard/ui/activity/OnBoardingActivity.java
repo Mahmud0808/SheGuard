@@ -27,7 +27,7 @@ public class OnBoardingActivity extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null && firebaseAuth.getCurrentUser().isEmailVerified()) {
-            startActivity(new Intent(OnBoardingActivity.this, MainActivity.class));
+            startActivity(new Intent(OnBoardingActivity.this, HomeActivity.class));
             finish();
         }
     }

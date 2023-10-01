@@ -71,8 +71,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             if (Objects.requireNonNull(firebaseAuth.getCurrentUser()).isEmailVerified()) {
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                finishAffinity();
                             } else {
                                 verifyEmailDialog.show(R.drawable.ic_warning, R.string.email_verification, getString(R.string.email_verification_description, binding.etEmail.getText().toString().trim()), resend_verification_email);
                             }

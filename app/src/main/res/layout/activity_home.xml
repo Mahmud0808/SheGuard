@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.activity.HomeActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
+                android:id="@+id/sos_button"
                 android:layout_width="280dp"
                 android:layout_height="280dp"
                 android:layout_gravity="center"
@@ -44,25 +45,14 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/start_service"
+                android:id="@+id/btn_shake_detection"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingHorizontal="80dp"
-                android:paddingVertical="16dp"
-                android:text="Start"
-                android:textSize="16sp"
-                app:cornerRadius="@dimen/component_corner_radius" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/stop_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:paddingHorizontal="80dp"
-                android:paddingVertical="16dp"
-                android:text="Stop"
+                android:layout_marginBottom="8dp"
+                android:minHeight="@dimen/button_height"
+                android:text="@string/btn_start_service"
                 android:textSize="16sp"
                 app:cornerRadius="@dimen/component_corner_radius" />
 
