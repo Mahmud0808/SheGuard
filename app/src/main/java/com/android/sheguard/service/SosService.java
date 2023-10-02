@@ -14,10 +14,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.Looper;
 import android.telephony.SmsManager;
 
 import androidx.annotation.NonNull;
@@ -34,12 +36,11 @@ import com.android.sheguard.model.NotificationSenderModel;
 import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.util.NotificationClient;
 import com.android.sheguard.util.NotificationResponse;
-import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
-import com.google.android.gms.tasks.CancellationToken;
-import com.google.android.gms.tasks.CancellationTokenSource;
-import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
@@ -61,7 +62,6 @@ public class SosService extends Service implements SensorEventListener {
     public String mLocation = "";
     public static boolean isRunning = false;
     private final SmsManager manager = SmsManager.getDefault();
-    private FusedLocationProviderClient fusedLocationClient = null;
     static final MediaPlayer mediaPlayer = new MediaPlayer();
     public static final int MIN_TIME_BETWEEN_SHAKES = 1000;
     private final Float shakeThreshold = 10.2f;
@@ -71,6 +71,8 @@ public class SosService extends Service implements SensorEventListener {
     private boolean sentSMS = false;
     private boolean sentNotification = false;
     private boolean calledEmergency = false;
+    private LocationManager locationManager = null;
+    private LocationRequest locationRequest = null;
     private static NotificationAPI notificationApiService = null;
 
     @Nullable
@@ -83,11 +85,13 @@ public class SosService extends Service implements SensorEventListener {
     public void onCreate() {
         super.onCreate();
 
-        if (fusedLocationClient == null) {
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (locationRequest == null) {
+            locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000)
+                    .setWaitForAccurateLocation(false)
+                    .setMinUpdateIntervalMillis(2000)
+                    .setMaxUpdateDelayMillis(5000)
+                    .build();
         }
-
-        updateLocation();
 
         if (notificationApiService == null) {
             notificationApiService = NotificationClient.getClient("https://fcm.googleapis.com/").create(NotificationAPI.class);
@@ -109,6 +113,7 @@ public class SosService extends Service implements SensorEventListener {
                 if (isRunning) {
                     this.stopForeground(true);
                     this.stopSelf();
+
                     stopSiren();
                     resetValues();
                 }
@@ -132,8 +137,6 @@ public class SosService extends Service implements SensorEventListener {
 
                 this.startForeground(1, notification);
                 notificationManager.notify(1, notification);
-
-                updateLocation();
 
                 isRunning = true;
                 return START_NOT_STICKY;
@@ -184,25 +187,17 @@ public class SosService extends Service implements SensorEventListener {
         Gson gson = new Gson();
         String jsonContacts = Prefs.getString(Constants.CONTACTS_LIST, "");
 
+        if (Prefs.getBoolean(Constants.SETTINGS_CALL_EMERGENCY_SERVICE, false) && !calledEmergency) {
+            callEmergency();
+            calledEmergency = true;
+        }
+
         if (!jsonContacts.isEmpty()) {
             Type type = new TypeToken<List<ContactModel>>() {
             }.getType();
             contacts.addAll(gson.fromJson(jsonContacts, type));
 
-            if (Prefs.getBoolean(Constants.SETTINGS_SEND_SMS, true) && !sentSMS) {
-                sendSMS(contacts);
-                sentSMS = true;
-            }
-
-            if (Prefs.getBoolean(Constants.SETTINGS_SEND_NOTIFICATION, true) && !sentNotification) {
-                sendNotification(contacts);
-                sentNotification = true;
-            }
-
-            if (Prefs.getBoolean(Constants.SETTINGS_CALL_EMERGENCY_SERVICE, false) && !calledEmergency) {
-                callEmergency();
-                calledEmergency = true;
-            }
+            sendLocation(contacts);
         }
 
         if (Prefs.getBoolean(Constants.SETTINGS_PLAY_SIREN, false)) {
@@ -212,35 +207,60 @@ public class SosService extends Service implements SensorEventListener {
         }
     }
 
-    public void updateLocation() {
-        if (fusedLocationClient == null ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+    private void sendLocation(ArrayList<ContactModel> contacts) {
+        if (isGPSEnabled() || !mLocation.isEmpty()) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+
+            final int[] numberOfUpdates = {0};
+
+            LocationServices.getFusedLocationProviderClient(this)
+                    .requestLocationUpdates(locationRequest, new LocationCallback() {
+                        @Override
+                        public void onLocationResult(@NonNull LocationResult locationResult) {
+                            super.onLocationResult(locationResult);
+                            numberOfUpdates[0]++;
+
+                            if (numberOfUpdates[0] >= 5) {
+                                LocationServices.getFusedLocationProviderClient(SosService.this)
+                                        .removeLocationUpdates(this);
+
+                                if (locationResult.getLocations().size() > 0) {
+                                    int idx = locationResult.getLocations().size() - 1;
+                                    double latitude = locationResult.getLocations().get(idx).getLatitude();
+                                    double longitude = locationResult.getLocations().get(idx).getLongitude();
+
+                                    mLocation = "https://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
+
+                                    // open google maps
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mLocation));
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+
+                                    if (Prefs.getBoolean(Constants.SETTINGS_SEND_SMS, true) && !sentSMS) {
+                                        sendSMS(contacts);
+                                        sentSMS = true;
+                                    }
+
+                                    if (Prefs.getBoolean(Constants.SETTINGS_SEND_NOTIFICATION, true) && !sentNotification) {
+                                        sendNotification(contacts);
+                                        sentNotification = true;
+                                    }
+                                }
+                            }
+                        }
+                    }, Looper.getMainLooper());
+        }
+    }
+
+    private boolean isGPSEnabled() {
+        if (locationManager == null) {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         }
 
-        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, new CancellationToken() {
-                    @NonNull
-                    @Override
-                    public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener listener) {
-                        return new CancellationTokenSource().getToken();
-                    }
-
-                    @Override
-                    public boolean isCancellationRequested() {
-                        return false;
-                    }
-                })
-                .addOnSuccessListener(location -> {
-                    if (location == null) {
-                        mLocation = "Unable to Find Location :(";
-                    } else {
-                        double altitude = location.getAltitude();
-                        double longitude = location.getLongitude();
-                        mLocation = "https://maps.google.com/maps?q=loc:" + altitude + "," + longitude;
-                    }
-                });
-
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     private void sendSMS(ContactModel contact) {
