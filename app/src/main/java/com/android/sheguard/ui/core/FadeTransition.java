@@ -15,6 +15,7 @@ import com.android.sheguard.R;
 @SuppressWarnings("unused")
 public class FadeTransition extends Transition {
 
+    private static final String PROP_NAME_ALPHA = "android:custom:alpha";
     private float startAlpha = 0.0f;
     private float endAlpha = 1.0f;
 
@@ -53,6 +54,4 @@ public class FadeTransition extends Transition {
         }
         return ObjectAnimator.ofFloat(view, View.ALPHA, startAlpha, endAlpha);
     }
-
-    private static final String PROP_NAME_ALPHA = "android:custom:alpha";
 }

@@ -1,17 +1,20 @@
-package com.android.sheguard.ui.activity;
+package com.android.sheguard.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.android.sheguard.R;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
-import com.android.sheguard.databinding.ActivityContactsBinding;
+import com.android.sheguard.databinding.FragmentContactsBinding;
 import com.android.sheguard.model.ContactModel;
 import com.android.sheguard.ui.adapter.ContactsAdapter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -24,21 +27,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressLint("StaticFieldLeak")
-public class ContactsActivity extends AppCompatActivity {
+public class ContactsFragment extends Fragment {
 
-    static ActivityContactsBinding binding;
     private static ArrayList<ContactModel> contacts;
     private static ContactsAdapter adapter;
+    private FragmentContactsBinding binding;
+
+    public static void removeContact(Context context, int idx) {
+        View tvEmptyList = ((AppCompatActivity) context).findViewById(R.id.tv_empty_list);
+        new MaterialAlertDialogBuilder(context, R.style.MaterialComponents_MaterialAlertDialog)
+                .setMessage("Are you sure you want to remove this contact?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    if (contacts.size() == 0) {
+                        return;
+                    }
+
+                    contacts.remove(idx);
+                    adapter.notifyDataSetChanged();
+
+                    Gson gson = new Gson();
+                    String jsonContacts = gson.toJson(contacts);
+                    Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
+
+                    tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
+                    Snackbar.make(((AppCompatActivity) context).findViewById(R.id.fragmentContainerView), "Contact removed successfully", Snackbar.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityContactsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentContactsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        setSupportActionBar(binding.header.toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.header.toolbar);
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -55,7 +80,7 @@ public class ContactsActivity extends AppCompatActivity {
             contacts.addAll(gson.fromJson(jsonContacts, type));
         }
 
-        adapter = new ContactsAdapter(this, contacts);
+        adapter = new ContactsAdapter(requireContext(), contacts);
         binding.listView.setAdapter(adapter);
         binding.listView.setNestedScrollingEnabled(true);
 
@@ -63,26 +88,31 @@ public class ContactsActivity extends AppCompatActivity {
             String name = Objects.requireNonNull(binding.etAddName.getText()).toString().trim();
             String number = Objects.requireNonNull(binding.etAddNumber.getText()).toString().trim();
 
-            if (number.length() < 10) {
-                Snackbar.make(findViewById(android.R.id.content), "Please enter a valid phone number", Snackbar.LENGTH_LONG).show();
+            if (name.isEmpty()) {
+                Snackbar.make(view, "Please enter a name", Snackbar.LENGTH_LONG).show();
+                return;
+            } else if (number.isEmpty()) {
+                Snackbar.make(view, "Please enter a phone number", Snackbar.LENGTH_LONG).show();
+                return;
+            } else if (number.length() < 10) {
+                Snackbar.make(view, "Please enter a valid phone number", Snackbar.LENGTH_LONG).show();
                 return;
             } else if (isPhoneNumberExists(number)) {
-                Snackbar.make(findViewById(android.R.id.content), "Contact already exists", Snackbar.LENGTH_LONG).show();
-                return;
-            } else if (name.isEmpty()) {
-                Snackbar.make(findViewById(android.R.id.content), "Please enter a name", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, "Contact already exists", Snackbar.LENGTH_LONG).show();
                 return;
             }
 
             addContact(name, number);
         });
 
-        binding.listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            removeContact(this, position);
+        binding.listView.setOnItemLongClickListener((parent, view1, position, id) -> {
+            removeContact(requireContext(), position);
             return false;
         });
 
         binding.tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
+
+        return view;
     }
 
     private void addContact(String name, String number) {
@@ -96,28 +126,7 @@ public class ContactsActivity extends AppCompatActivity {
         Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
 
         binding.tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
-    }
-
-    public static void removeContact(Context context, int idx) {
-        new MaterialAlertDialogBuilder(context, R.style.MaterialComponents_MaterialAlertDialog)
-                .setMessage("Are you sure you want to remove this contact?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    if (contacts.size() == 0) {
-                        return;
-                    }
-
-                    contacts.remove(idx);
-                    adapter.notifyDataSetChanged();
-
-                    Gson gson = new Gson();
-                    String jsonContacts = gson.toJson(contacts);
-                    Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
-
-                    binding.tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
-                })
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                .show();
+        Snackbar.make(requireView(), "Contact added successfully", Snackbar.LENGTH_SHORT).show();
     }
 
     public boolean isPhoneNumberExists(String newNumber) {
@@ -127,11 +136,5 @@ public class ContactsActivity extends AppCompatActivity {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

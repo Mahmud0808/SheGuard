@@ -9,9 +9,8 @@ import android.widget.FrameLayout;
 
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.android.sheguard.config.Prefs;
 import com.android.sheguard.databinding.ViewOnboardingPageBinding;
-import com.android.sheguard.ui.activity.LoginActivity;
+import com.android.sheguard.ui.activity.LoginRegisterActivity;
 import com.android.sheguard.ui.adapter.OnBoardingPagerAdapter;
 import com.android.sheguard.ui.core.Transform;
 import com.android.sheguard.ui.entity.OnBoardingPage;
@@ -19,8 +18,8 @@ import com.android.sheguard.ui.entity.OnBoardingPage;
 @SuppressWarnings("unused")
 public class OnBoardingView extends FrameLayout {
 
-    private int numberOfPages;
     private static ViewOnboardingPageBinding binding;
+    private int numberOfPages;
 
     public OnBoardingView(Context context) {
         this(context, null);
@@ -37,6 +36,14 @@ public class OnBoardingView extends FrameLayout {
     public OnBoardingView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initialize(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public static void navigateToPrevSlide() {
+        int prevSlidePos = binding.slider.getCurrentItem() - 1;
+        if (prevSlidePos < 0) {
+            throw new IllegalArgumentException("Can't navigate to previous slide, because current slide is first");
+        }
+        binding.slider.setCurrentItem(prevSlidePos, true);
     }
 
     private void initialize(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -75,22 +82,13 @@ public class OnBoardingView extends FrameLayout {
     }
 
     private void setFirstTimeLaunchToFalse() {
-        Prefs.putBoolean("IS_FIRST_TIME_LAUNCH", false);
-        getContext().startActivity(new Intent(getContext(), LoginActivity.class));
+        getContext().startActivity(new Intent(getContext(), LoginRegisterActivity.class));
         ((Activity) getContext()).finish();
     }
 
     private void navigateToNextSlide(ViewPager2 slider) {
         int nextSlidePos = slider.getCurrentItem() + 1;
         slider.setCurrentItem(nextSlidePos, true);
-    }
-
-    public static void navigateToPrevSlide() {
-        int prevSlidePos = binding.slider.getCurrentItem() - 1;
-        if (prevSlidePos < 0) {
-            throw new IllegalArgumentException("Can't navigate to previous slide, because current slide is first");
-        }
-        binding.slider.setCurrentItem(prevSlidePos, true);
     }
 
     private void navigateToLastSlide(ViewPager2 slider) {

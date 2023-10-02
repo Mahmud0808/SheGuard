@@ -1,28 +1,33 @@
-package com.android.sheguard.ui.activity;
+package com.android.sheguard.ui.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.android.sheguard.R;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
-import com.android.sheguard.databinding.ActivitySettingsBinding;
+import com.android.sheguard.databinding.FragmentSettingsBinding;
 import com.android.sheguard.service.SosService;
+import com.android.sheguard.ui.activity.MainActivity;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsFragment extends Fragment {
 
-    ActivitySettingsBinding binding;
+    private FragmentSettingsBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        setSupportActionBar(binding.header.toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.header.toolbar);
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -33,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
         binding.switchShakeDetection.setChecked(Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false));
         binding.switchShakeDetection.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Prefs.putBoolean(Constants.SETTINGS_SHAKE_DETECTION, isChecked);
-            HomeActivity.shakeDetection.setValue(isChecked);
+            MainActivity.shakeDetection.setValue(isChecked);
         });
         binding.shakeDetectionContainer.setOnClickListener(v -> binding.switchShakeDetection.toggle());
 
@@ -57,11 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         binding.switchCallEmergencyService.setChecked(Prefs.getBoolean(Constants.SETTINGS_CALL_EMERGENCY_SERVICE, false));
         binding.switchCallEmergencyService.setOnCheckedChangeListener((buttonView, isChecked) -> Prefs.putBoolean(Constants.SETTINGS_CALL_EMERGENCY_SERVICE, isChecked));
         binding.callEmergencyServiceContainer.setOnClickListener(v -> binding.switchCallEmergencyService.toggle());
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        return view;
     }
 }

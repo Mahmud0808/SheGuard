@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.SettingsActivity">
+    tools:context=".ui.fragment.SettingsFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
 
 import com.android.sheguard.R;
 import com.android.sheguard.model.ContactModel;
-import com.android.sheguard.ui.activity.ContactsActivity;
+import com.android.sheguard.ui.fragment.ContactsFragment;
 
 import java.util.ArrayList;
 
@@ -62,7 +62,7 @@ public class ContactsAdapter extends ArrayAdapter<ContactModel> {
         });
 
         ImageView delete = convertView.findViewById(R.id.delete);
-        delete.setOnClickListener(v -> ContactsActivity.removeContact(context, position));
+        delete.setOnClickListener(v -> ContactsFragment.removeContact(context, position));
 
         convertView.setOnClickListener(v -> context.startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + contacts.get(position).getPhone()))));
 

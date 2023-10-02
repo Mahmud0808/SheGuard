@@ -61,7 +61,7 @@ public class VerifyEmailDialog extends AppCompatActivity {
         resend_email.setOnClickListener(onClickListener);
 
         Button close = dialog.findViewById(R.id.close);
-        close.setOnClickListener(view -> dialog.hide());
+        close.setOnClickListener(view -> hide());
 
         dialog.create();
         dialog.show();
@@ -74,14 +74,14 @@ public class VerifyEmailDialog extends AppCompatActivity {
     }
 
     public void hide() {
-        if ((dialog != null) && dialog.isShowing()) dialog.dismiss();
+        if ((dialog != null) && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void onDestroy() {
+        hide();
         super.onDestroy();
-        if (dialog != null && !isFinishing()) {
-            dialog.dismiss();
-        }
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.LoginActivity">
+    tools:context=".ui.fragment.RegisterFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     android:id="@+id/et_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Full Name"
+                    android:hint="Full name"
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
                     android:singleLine="true" />
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Password"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"
+                    android:inputType="textPassword|textNoSuggestions"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -197,9 +197,9 @@
                     android:id="@+id/et_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
+                    android:hint="Confirm password"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"
+                    android:inputType="textPassword|textNoSuggestions"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>

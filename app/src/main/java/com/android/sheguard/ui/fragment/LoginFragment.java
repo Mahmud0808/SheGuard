@@ -1,14 +1,19 @@
-package com.android.sheguard.ui.activity;
+package com.android.sheguard.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.sheguard.R;
-import com.android.sheguard.databinding.ActivityLoginBinding;
+import com.android.sheguard.databinding.FragmentLoginBinding;
+import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.ui.view.LoadingDialog;
 import com.android.sheguard.ui.view.VerifyEmailDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -16,35 +21,36 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginFragment extends Fragment {
 
-    ActivityLoginBinding binding;
-    FirebaseAuth firebaseAuth;
-    LoadingDialog loadingDialog;
-    VerifyEmailDialog verifyEmailDialog;
+    private FragmentLoginBinding binding;
+    private FirebaseAuth firebaseAuth;
+    private LoadingDialog loadingDialog;
+    private VerifyEmailDialog verifyEmailDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        loadingDialog = new LoadingDialog(this);
-        verifyEmailDialog = new VerifyEmailDialog(this);
+        loadingDialog = new LoadingDialog(getContext());
+        verifyEmailDialog = new VerifyEmailDialog(getContext());
 
         View.OnClickListener resend_verification_email = v -> Objects.requireNonNull(firebaseAuth.getCurrentUser()).sendEmailVerification()
                 .addOnCompleteListener(task -> {
                     verifyEmailDialog.hide();
 
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Verification email sent", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, "Verification email sent", Snackbar.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        if (getContext() != null) {
+                            Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
-        Intent intent = getIntent();
+        Intent intent = requireActivity().getIntent();
         if (intent != null) {
             boolean showEmailVerification = intent.getBooleanExtra("showEmailVerification", false);
             String email = intent.getStringExtra("email");
@@ -54,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        binding.btnRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+        binding.btnRegister.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_registerFragment));
 
         binding.btnLogin.setOnClickListener(v -> {
             if (!isInformationValid()) {
@@ -71,13 +77,16 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             if (Objects.requireNonNull(firebaseAuth.getCurrentUser()).isEmailVerified()) {
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                finishAffinity();
+                                Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent1);
                             } else {
                                 verifyEmailDialog.show(R.drawable.ic_warning, R.string.email_verification, getString(R.string.email_verification_description, binding.etEmail.getText().toString().trim()), resend_verification_email);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            if (getContext() != null) {
+                                Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
         });
@@ -87,15 +96,17 @@ public class LoginActivity extends AppCompatActivity {
                     verifyEmailDialog.hide();
 
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Password reset email sent", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, "Password reset email sent", Snackbar.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        if (getContext() != null) {
+                            Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }));
 
         binding.tvForgotPassword.setOnClickListener(v -> {
             if (Objects.requireNonNull(binding.etEmail.getText()).toString().trim().isEmpty()) {
-                Snackbar.make(binding.getRoot(), "Enter your email address", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, "Enter your email address", Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
@@ -109,6 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
         });
+
+        return view;
     }
 
     private boolean isInformationValid() {
@@ -134,9 +147,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
         loadingDialog.hide();
         verifyEmailDialog.hide();
+        super.onDestroyView();
     }
 }

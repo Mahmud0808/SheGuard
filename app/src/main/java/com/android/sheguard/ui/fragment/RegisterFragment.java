@@ -1,13 +1,18 @@
-package com.android.sheguard.ui.activity;
+package com.android.sheguard.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.android.sheguard.common.Constants;
-import com.android.sheguard.databinding.ActivityRegisterBinding;
+import com.android.sheguard.databinding.FragmentRegisterBinding;
 import com.android.sheguard.model.UserModel;
 import com.android.sheguard.ui.view.LoadingDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,22 +24,21 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterFragment extends Fragment {
 
-    ActivityRegisterBinding binding;
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore firestore;
-    LoadingDialog loadingDialog;
+    private FragmentRegisterBinding binding;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firestore;
+    private LoadingDialog loadingDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentRegisterBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
-        loadingDialog = new LoadingDialog(this);
+        loadingDialog = new LoadingDialog(getContext());
 
         binding.btnRegister.setOnClickListener(v -> {
             if (!isInformationValid()) {
@@ -53,31 +57,32 @@ public class RegisterActivity extends AppCompatActivity {
                                         if (task1.isSuccessful()) {
                                             saveUserInDatabase();
 
-                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                            Intent intent = requireActivity().getIntent();
                                             intent.putExtra("showEmailVerification", true);
                                             intent.putExtra("email", binding.etEmail.getText().toString().trim());
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
-                                            finish();
                                         } else {
                                             loadingDialog.hide();
-                                            Toast.makeText(getApplicationContext(), Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                                            task1.getException().printStackTrace();
+
+                                            if (getContext() != null) {
+                                                Toast.makeText(getContext(), Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     });
                         } else {
                             loadingDialog.hide();
 
-                            Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                            task.getException().printStackTrace();
+                            if (getContext() != null) {
+                                Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
         });
 
-        binding.btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finishAffinity();
-        });
+        binding.btnLogin.setOnClickListener(v -> requireActivity().onBackPressed());
+
+        return view;
     }
 
     private boolean isInformationValid() {
@@ -94,19 +99,23 @@ public class RegisterActivity extends AppCompatActivity {
         if (Objects.requireNonNull(binding.etEmail.getText()).toString().trim().isEmpty()) {
             binding.etEmailLayout.setError("Please enter your email");
             isValid = false;
+        } else if (!isValidEmail(binding.etEmail.getText().toString().trim())) {
+            binding.etEmailLayout.setError("Please enter a valid email");
+            isValid = false;
         } else {
             binding.etEmailLayout.setErrorEnabled(false);
             binding.etEmailLayout.setError(null);
         }
 
-        if (!Objects.requireNonNull(binding.etPhone.getText()).toString().trim().isEmpty()) {
-            if (binding.etPhone.getText().toString().trim().length() < 10) {
-                binding.etPhoneLayout.setError("Please enter a valid phone number");
-                isValid = false;
-            } else {
-                binding.etPhoneLayout.setErrorEnabled(false);
-                binding.etPhoneLayout.setError(null);
-            }
+        if (Objects.requireNonNull(binding.etPhone.getText()).toString().trim().isEmpty()) {
+            binding.etPhoneLayout.setError("Please enter your phone number");
+            isValid = false;
+        } else if (binding.etPhone.getText().toString().trim().length() < 10) {
+            binding.etPhoneLayout.setError("Please enter a valid phone number");
+            isValid = false;
+        } else {
+            binding.etPhoneLayout.setErrorEnabled(false);
+            binding.etPhoneLayout.setError(null);
         }
 
         if (Objects.requireNonNull(binding.etPassword.getText()).toString().trim().isEmpty()) {
@@ -143,15 +152,19 @@ public class RegisterActivity extends AppCompatActivity {
         return isValid;
     }
 
-    private boolean isValidPassword(final String password) {
-        final String PASSWORD_PATTERN = "^" +
-                "(?=.*[0-9])" +         // at least 1 digit
-                "(?=.*[a-z])" +         // at least 1 lower case letter
-                "(?=.*[A-Z])" +         // at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      // any letter
-                "(?=\\S+$)" +           // no white spaces
-                ".{8,}" +               // at least 8 characters
-                "$";
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        final String PASSWORD_PATTERN = "^" +   // Start of string
+                "(?=.*[0-9])" +                 // at least 1 digit
+                "(?=.*[a-z])" +                 // at least 1 lower case letter
+                "(?=.*[A-Z])" +                 // at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +              // any letter
+                "(?=\\S+$)" +                   // no white spaces
+                ".{8,}" +                       // at least 8 characters
+                "$";                            // end of string
 
         return Pattern.compile(PASSWORD_PATTERN).matcher(password).matches();
     }
@@ -183,8 +196,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
         loadingDialog.hide();
+        super.onDestroyView();
     }
 }

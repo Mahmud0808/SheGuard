@@ -1,29 +1,33 @@
-package com.android.sheguard.ui.activity;
+package com.android.sheguard.ui.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.android.sheguard.R;
-import com.android.sheguard.databinding.ActivitySafetyTipsBinding;
+import com.android.sheguard.databinding.FragmentSafetyTipsBinding;
 import com.android.sheguard.ui.adapter.SafetyTipsAdapter;
 
 import java.util.ArrayList;
 
-public class SafetyTipsActivity extends AppCompatActivity {
+public class SafetyTipsFragment extends Fragment {
 
-    ActivitySafetyTipsBinding binding;
     private final ArrayList<String> safetyTips = new ArrayList<>();
+    private FragmentSafetyTipsBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivitySafetyTipsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentSafetyTipsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        setSupportActionBar(binding.header.toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.header.toolbar);
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -53,14 +57,10 @@ public class SafetyTipsActivity extends AppCompatActivity {
         safetyTips.add(getString(R.string.safety_tips_tip_20));
         safetyTips.add(getString(R.string.safety_tips_tip_21));
 
-        SafetyTipsAdapter adapter = new SafetyTipsAdapter(this, safetyTips);
+        SafetyTipsAdapter adapter = new SafetyTipsAdapter(requireContext(), safetyTips);
         binding.listView.setAdapter(adapter);
         binding.listView.setNestedScrollingEnabled(true);
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        return view;
     }
 }

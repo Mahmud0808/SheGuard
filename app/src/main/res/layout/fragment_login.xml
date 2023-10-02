@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.LoginActivity">
+    tools:context=".ui.fragment.LoginFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Password"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"
+                    android:inputType="textPassword|textNoSuggestions"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>

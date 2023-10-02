@@ -1,30 +1,34 @@
-package com.android.sheguard.ui.activity;
+package com.android.sheguard.ui.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.android.sheguard.R;
-import com.android.sheguard.databinding.ActivityHelplineBinding;
+import com.android.sheguard.databinding.FragmentHelplineBinding;
 import com.android.sheguard.model.HelplineModel;
 import com.android.sheguard.ui.adapter.HelplineAdapter;
 
 import java.util.ArrayList;
 
-public class HelplineActivity extends AppCompatActivity {
+public class HelplineFragment extends Fragment {
 
-    ActivityHelplineBinding binding;
     private final ArrayList<HelplineModel> helplines = new ArrayList<>();
+    private FragmentHelplineBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityHelplineBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentHelplineBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        setSupportActionBar(binding.header.toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.header.toolbar);
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -93,14 +97,10 @@ public class HelplineActivity extends AppCompatActivity {
                 "01888066747 (For Chittagong Region, including Cox’s Bazar district)", "01869859757 (For Dhaka and rest of the districts)"
         ));
 
-        HelplineAdapter adapter = new HelplineAdapter(this, helplines);
+        HelplineAdapter adapter = new HelplineAdapter(requireContext(), helplines);
         binding.listView.setAdapter(adapter);
         binding.listView.setNestedScrollingEnabled(true);
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        return view;
     }
 }

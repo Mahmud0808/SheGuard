@@ -57,7 +57,7 @@ public class InfoDialog extends AppCompatActivity {
         }
 
         Button close = dialog.findViewById(R.id.close);
-        close.setOnClickListener(view -> dialog.hide());
+        close.setOnClickListener(view -> hide());
 
         dialog.create();
         dialog.show();
@@ -70,14 +70,14 @@ public class InfoDialog extends AppCompatActivity {
     }
 
     public void hide() {
-        if ((dialog != null) && dialog.isShowing()) dialog.dismiss();
+        if ((dialog != null) && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override
     public void onDestroy() {
+        hide();
         super.onDestroy();
-        if (dialog != null && !isFinishing()) {
-            dialog.dismiss();
-        }
     }
 }

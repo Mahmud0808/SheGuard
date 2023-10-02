@@ -75,4 +75,6 @@
     <string name="safety_tips_tip_19">Don\'t check-in on social media apps when you arrive somewhere. Instead, check in as you leave. This way no one will be able to digitally stalk you and know your every move or when you\'re not at home. Along the same lines, avoid tweeting or using Facebook from vacation, especially if your account is public, as it is a way of letting the world know your home is unoccupied.</string>
     <string name="safety_tips_tip_20">When you move into a new residence, check areas for possible hidden cameras. Your landlord, previous tenant or previous owner could be spying on you.</string>
     <string name="safety_tips_tip_21">Unfortunately, no matter how diligently we practice awareness and avoidance techniques, we may find ourselves in a physical confrontation. If available, it is suggested to take self defense training.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

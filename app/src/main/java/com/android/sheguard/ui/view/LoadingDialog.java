@@ -70,7 +70,7 @@ public class LoadingDialog extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
+        hide();
         super.onDestroy();
-        dialog.hide();
     }
 }

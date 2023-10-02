@@ -31,7 +31,7 @@ import com.android.sheguard.config.Prefs;
 import com.android.sheguard.model.ContactModel;
 import com.android.sheguard.model.NotificationDataModel;
 import com.android.sheguard.model.NotificationSenderModel;
-import com.android.sheguard.ui.activity.HomeActivity;
+import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.util.NotificationClient;
 import com.android.sheguard.util.NotificationResponse;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -71,7 +71,6 @@ public class SosService extends Service implements SensorEventListener {
     private boolean sentSMS = false;
     private boolean sentNotification = false;
     private boolean calledEmergency = false;
-    private final String emergencyNumber = "999";
     private static NotificationAPI notificationApiService = null;
 
     @Nullable
@@ -99,7 +98,7 @@ public class SosService extends Service implements SensorEventListener {
 
         if (sensorManager != null) {
             Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            sensorManager.registerListener((SensorEventListener) this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
 
@@ -114,7 +113,7 @@ public class SosService extends Service implements SensorEventListener {
                     resetValues();
                 }
             } else {
-                Intent notificationIntent = new Intent(this, HomeActivity.class);
+                Intent notificationIntent = new Intent(this, MainActivity.class);
                 notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -311,7 +310,7 @@ public class SosService extends Service implements SensorEventListener {
             return;
         }
 
-        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + emergencyNumber)));
+        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER)));
     }
 
     public void playSiren() {

@@ -12,7 +12,7 @@ import android.util.Patterns;
 import androidx.annotation.NonNull;
 
 import com.android.sheguard.R;
-import com.android.sheguard.ui.activity.HomeActivity;
+import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.util.FirebaseUtil;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -54,7 +54,7 @@ public class FireBaseMessageService extends FirebaseMessagingService {
         if (!url.isEmpty()) {
             notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         } else {
-            notificationIntent = new Intent(this, HomeActivity.class);
+            notificationIntent = new Intent(this, MainActivity.class);
         }
 
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

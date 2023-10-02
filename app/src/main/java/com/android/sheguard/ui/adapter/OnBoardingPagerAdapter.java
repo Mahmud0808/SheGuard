@@ -25,9 +25,7 @@ public class OnBoardingPagerAdapter extends RecyclerView.Adapter<OnBoardingPager
     @Override
     public PagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ViewOnboardingPageItemBinding binding = ViewOnboardingPageItemBinding.inflate(
-                inflater, parent, false
-        );
+        ViewOnboardingPageItemBinding binding = ViewOnboardingPageItemBinding.inflate(inflater, parent, false);
         return new PagerViewHolder(binding);
     }
 
