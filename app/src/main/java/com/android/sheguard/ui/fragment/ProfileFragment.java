@@ -139,7 +139,7 @@ public class ProfileFragment extends Fragment {
 
                         numberOfUpdates[0]++;
 
-                        if (numberOfUpdates[0] >= 5) {
+                        if (numberOfUpdates[0] >= 3) {
                             LocationServices.getFusedLocationProviderClient(getContext())
                                     .removeLocationUpdates(this);
 

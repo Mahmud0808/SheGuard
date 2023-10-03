@@ -16,6 +16,7 @@ import com.android.sheguard.config.Prefs;
 import com.android.sheguard.databinding.FragmentSettingsBinding;
 import com.android.sheguard.service.SosService;
 import com.android.sheguard.ui.activity.MainActivity;
+import com.android.sheguard.util.SosUtil;
 
 public class SettingsFragment extends Fragment {
 
@@ -55,6 +56,7 @@ public class SettingsFragment extends Fragment {
             Prefs.putBoolean(Constants.SETTINGS_PLAY_SIREN, isChecked);
             if (!isChecked) {
                 SosService.stopSiren();
+                SosUtil.stopSiren();
             }
         });
         binding.playSirenContainer.setOnClickListener(v -> binding.switchPlaySiren.toggle());

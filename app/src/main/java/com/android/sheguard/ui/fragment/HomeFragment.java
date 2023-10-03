@@ -3,9 +3,6 @@ package com.android.sheguard.ui.fragment;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -29,15 +26,7 @@ import com.android.sheguard.service.SosService;
 import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.util.AppUtil;
 import com.android.sheguard.util.FirebaseUtil;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.Priority;
-import com.google.android.gms.tasks.Task;
+import com.android.sheguard.util.SosUtil;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -50,8 +39,6 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private LocationManager locationManager = null;
-    private LocationRequest locationRequest = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,14 +50,6 @@ public class HomeFragment extends Fragment {
         binding.header.collapsingToolbar.setSubtitle(getString(R.string.activity_home_desc, "How are you?"));
         setUserNameOnTitle();
 
-        if (locationRequest == null) {
-            locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000)
-                    .setWaitForAccurateLocation(false)
-                    .setMinUpdateIntervalMillis(2000)
-                    .setMaxUpdateDelayMillis(5000)
-                    .build();
-        }
-
         NotificationManager notificationManager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationChannel channel1 = new NotificationChannel(getString(R.string.notification_channel_push), getString(R.string.notification_channel_push), NotificationManager.IMPORTANCE_HIGH);
         NotificationChannel channel2 = new NotificationChannel(getString(R.string.notification_channel_emergency), getString(R.string.notification_channel_emergency), NotificationManager.IMPORTANCE_DEFAULT);
@@ -78,12 +57,13 @@ public class HomeFragment extends Fragment {
         notificationManager.createNotificationChannel(channel2);
 
         binding.sosButton.setOnClickListener(v -> {
-            if (!isGPSEnabled()) {
-                turnOnGPS();
-                return;
+            if (AppUtil.permissionsGranted(getContext()) && SosUtil.isGPSEnabled(requireContext())) {
+                SosUtil.activateInstantSosMode(requireContext());
+            } else if (!AppUtil.permissionsGranted(getContext())) {
+                multiplePermissions.launch(AppUtil.REQUIRED_PERMISSIONS);
+            } else {
+                SosUtil.turnOnGPS(requireContext());
             }
-
-            // do other stuff
         });
 
         MainActivity.shakeDetection.setValue(Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false));
@@ -91,7 +71,7 @@ public class HomeFragment extends Fragment {
             binding.btnShakeDetection.setVisibility(newValue ? View.VISIBLE : View.GONE);
             updateButtonText();
             if (!newValue) {
-                stopSosNotificationService();
+                SosUtil.stopSosNotificationService(requireContext());
             }
         });
         binding.btnShakeDetection.setVisibility(Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false) ? View.VISIBLE : View.GONE);
@@ -100,16 +80,16 @@ public class HomeFragment extends Fragment {
 
         binding.btnShakeDetection.setOnClickListener(v -> {
             if (!SosService.isRunning) {
-                if (AppUtil.permissionsGranted(getContext()) && isGPSEnabled()) {
-                    startSosNotificationService();
+                if (AppUtil.permissionsGranted(getContext()) && SosUtil.isGPSEnabled(requireContext())) {
+                    SosUtil.startSosNotificationService(requireContext());
                     Snackbar.make(requireActivity().findViewById(android.R.id.content), "Service Started!", Snackbar.LENGTH_LONG).show();
                 } else if (!AppUtil.permissionsGranted(getContext())) {
                     multiplePermissions.launch(AppUtil.REQUIRED_PERMISSIONS);
                 } else {
-                    turnOnGPS();
+                    SosUtil.turnOnGPS(requireContext());
                 }
             } else {
-                stopSosNotificationService();
+                SosUtil.stopSosNotificationService(requireContext());
                 Snackbar.make(requireActivity().findViewById(android.R.id.content), "Service Stopped!", Snackbar.LENGTH_LONG).show();
             }
 
@@ -171,61 +151,6 @@ public class HomeFragment extends Fragment {
             }
         }
     });
-
-    private boolean isGPSEnabled() {
-        if (locationManager == null) {
-            locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
-        }
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-    }
-
-    private void turnOnGPS() {
-        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(requireContext())
-                .checkLocationSettings(new LocationSettingsRequest.Builder()
-                        .addLocationRequest(locationRequest)
-                        .setAlwaysShow(true)
-                        .build()
-                );
-
-        result.addOnCompleteListener(task -> {
-            try {
-                task.getResult(ApiException.class);
-            } catch (ApiException apiException) {
-                switch (apiException.getStatusCode()) {
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try {
-                            ResolvableApiException resolvableApiException = (ResolvableApiException) apiException;
-                            resolvableApiException.startResolutionForResult(requireActivity(), 2);
-                        } catch (IntentSender.SendIntentException sendIntentException) {
-                            sendIntentException.printStackTrace();
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        // device doesn't have location settings
-                        break;
-                }
-            }
-        });
-    }
-
-    private void startSosNotificationService() {
-        if (!SosService.isRunning) {
-            Intent notificationIntent = new Intent(getActivity(), SosService.class);
-            notificationIntent.setAction("START");
-
-            requireContext().startForegroundService(notificationIntent);
-        }
-    }
-
-    private void stopSosNotificationService() {
-        if (SosService.isRunning) {
-            Intent notificationIntent = new Intent(getActivity(), SosService.class);
-            notificationIntent.setAction("STOP");
-
-            requireContext().startForegroundService(notificationIntent);
-        }
-    }
 
     private void updateButtonText() {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {

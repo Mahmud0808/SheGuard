@@ -34,22 +34,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.AboutActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.HelplineActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.SafetyTipsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.ContactsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.activity.OnBoardingActivity"
             android:exported="true">
@@ -59,19 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.HomeActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
 
         <service
             android:name=".service.SosService"
@@ -79,7 +52,7 @@
         <service
             android:name=".service.FireBaseMessageService"
             android:directBootAware="true"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

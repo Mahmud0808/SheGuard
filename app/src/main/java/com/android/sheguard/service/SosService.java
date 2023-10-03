@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.os.Looper;
 import android.telephony.SmsManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,21 +60,21 @@ import retrofit2.Response;
 @SuppressWarnings("FieldCanBeLocal")
 public class SosService extends Service implements SensorEventListener {
 
-    public String mLocation = "";
-    public static boolean isRunning = false;
-    private final SmsManager manager = SmsManager.getDefault();
-    static final MediaPlayer mediaPlayer = new MediaPlayer();
-    public static final int MIN_TIME_BETWEEN_SHAKES = 1000;
-    private final Float shakeThreshold = 10.2f;
-    private SensorManager sensorManager = null;
-    private AudioManager audioManager = null;
+    private String mLocation = "";
     private long lastShakeTime = 0;
     private boolean sentSMS = false;
-    private boolean sentNotification = false;
+    public static boolean isRunning = false;
     private boolean calledEmergency = false;
+    private boolean sentNotification = false;
+    private AudioManager audioManager = null;
+    private final Float shakeThreshold = 10.2f;
+    private SensorManager sensorManager = null;
     private LocationManager locationManager = null;
     private LocationRequest locationRequest = null;
+    private static final int MIN_TIME_BETWEEN_SHAKES = 1000;
     private static NotificationAPI notificationApiService = null;
+    private final SmsManager smsManager = SmsManager.getDefault();
+    private static final MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Nullable
     @Override
@@ -116,6 +117,7 @@ public class SosService extends Service implements SensorEventListener {
 
                     stopSiren();
                     resetValues();
+                    Log.i("SosService", "Service Stopped");
                 }
             } else {
                 Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -139,6 +141,7 @@ public class SosService extends Service implements SensorEventListener {
                 notificationManager.notify(1, notification);
 
                 isRunning = true;
+                Log.i("SosService", "Service Started");
                 return START_NOT_STICKY;
             }
         }
@@ -163,6 +166,7 @@ public class SosService extends Service implements SensorEventListener {
                 if (acceleration > shakeThreshold) {
                     lastShakeTime = curTime;
                     deviceShaken();
+                    Log.i("SosService", "Device Shaken");
                 }
             }
         }
@@ -176,13 +180,14 @@ public class SosService extends Service implements SensorEventListener {
     private void deviceShaken() {
         if (!Prefs.getBoolean(Constants.SETTINGS_SHAKE_DETECTION, false)) {
             stopSiren();
+            Log.i("SosService", "Stopped Siren");
             return;
         }
 
         activateSosMode();
     }
 
-    public void activateSosMode() {
+    private void activateSosMode() {
         ArrayList<ContactModel> contacts = new ArrayList<>();
         Gson gson = new Gson();
         String jsonContacts = Prefs.getString(Constants.CONTACTS_LIST, "");
@@ -202,8 +207,10 @@ public class SosService extends Service implements SensorEventListener {
 
         if (Prefs.getBoolean(Constants.SETTINGS_PLAY_SIREN, false)) {
             playSiren();
+            Log.i("SosService", "Playing Siren");
         } else {
             stopSiren();
+            Log.i("SosService", "Stopped Siren");
         }
     }
 
@@ -223,7 +230,7 @@ public class SosService extends Service implements SensorEventListener {
                             super.onLocationResult(locationResult);
                             numberOfUpdates[0]++;
 
-                            if (numberOfUpdates[0] >= 5) {
+                            if (numberOfUpdates[0] >= 3) {
                                 LocationServices.getFusedLocationProviderClient(SosService.this)
                                         .removeLocationUpdates(this);
 
@@ -233,11 +240,7 @@ public class SosService extends Service implements SensorEventListener {
                                     double longitude = locationResult.getLocations().get(idx).getLongitude();
 
                                     mLocation = "https://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
-
-                                    // open google maps
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mLocation));
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
+                                    Log.i("SosService", "Location: received location ");
 
                                     if (Prefs.getBoolean(Constants.SETTINGS_SEND_SMS, true) && !sentSMS) {
                                         sendSMS(contacts);
@@ -260,14 +263,16 @@ public class SosService extends Service implements SensorEventListener {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         }
 
+        Log.i("SosService", "Location: GPS Enabled: " + locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     private void sendSMS(ContactModel contact) {
-        manager.sendTextMessage(contact.getPhone(), null, getString(R.string.sos_message, contact.getName(), mLocation), null, null);
+        smsManager.sendTextMessage(contact.getPhone(), null, getString(R.string.sos_message, contact.getName(), mLocation), null, null);
+        Log.i("SosService", "SMS: sent");
     }
 
-    public void sendSMS(ArrayList<ContactModel> contacts) {
+    private void sendSMS(ArrayList<ContactModel> contacts) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -288,6 +293,7 @@ public class SosService extends Service implements SensorEventListener {
                             DocumentSnapshot document1 = task1.getResult();
 
                             if (document1.exists() && document1.getString("uid") != null) {
+                                Log.i("SosService", "Notification: uid found");
 
                                 FirebaseFirestore.getInstance()
                                         .collection(Constants.FIRESTORE_COLLECTION_TOKENS)
@@ -298,6 +304,7 @@ public class SosService extends Service implements SensorEventListener {
                                                 DocumentSnapshot document2 = task2.getResult();
 
                                                 if (document2.exists() && document2.getString("token") != null) {
+                                                    Log.i("SosService", "Notification: token found");
                                                     sendNotification(document2.getString("token"), Prefs.getString(Constants.PREFS_USER_NAME, getString(R.string.app_name)), getString(R.string.sos_notification, mLocation));
                                                 }
                                             }
@@ -308,32 +315,33 @@ public class SosService extends Service implements SensorEventListener {
         }
     }
 
-    public static void sendNotification(String userToken, String title, String message) {
+    private static void sendNotification(String userToken, String title, String message) {
         NotificationDataModel data = new NotificationDataModel(title, message);
         NotificationSenderModel sender = new NotificationSenderModel(data, userToken);
 
         notificationApiService.sendNotification(sender).enqueue(new Callback<NotificationResponse>() {
             @Override
             public void onResponse(@NonNull Call<NotificationResponse> call, @NonNull Response<NotificationResponse> response) {
-                // do nothing
+                Log.i("SOS", "sendNotification: " + response.message());
             }
 
             @Override
             public void onFailure(@NonNull Call<NotificationResponse> call, @NonNull Throwable t) {
-                // do nothing
+                Log.i("SOS", "sendNotification: " + t.getMessage());
             }
         });
     }
 
-    public void callEmergency() {
+    private void callEmergency() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
         startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER)));
+        Log.i("SosService", "Call: called emergency");
     }
 
-    public void playSiren() {
+    private void playSiren() {
         if (mediaPlayer.isPlaying()) {
             return;
         }
