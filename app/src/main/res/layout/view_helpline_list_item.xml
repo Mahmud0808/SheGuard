@@ -25,22 +25,6 @@
         app:layout_constraintWidth_min="wrap" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/name_colon"
-        style="@style/TextAppearance.Material3.BodyMedium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=":"
-        android:textAlignment="viewEnd"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/barrier"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/name_title"
-        app:layout_constraintTop_toTopOf="@id/name_title"
-        app:layout_constraintWidth_min="wrap" />
-
-    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/number_title"
         style="@style/TextAppearance.Material3.BodyMedium"
         android:layout_width="0dp"
@@ -49,25 +33,9 @@
         android:textColor="?attr/colorPrimary"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/name_title"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintTop_toTopOf="@id/number"
-        app:layout_constraintWidth_min="wrap" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/phone_colon"
-        style="@style/TextAppearance.Material3.BodyMedium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=":"
-        android:textAlignment="viewEnd"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/barrier"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/number_title"
-        app:layout_constraintTop_toTopOf="@id/number_title"
         app:layout_constraintWidth_min="wrap" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -79,25 +47,9 @@
         android:textColor="?attr/colorPrimary"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/name_title"
         app:layout_constraintTop_toBottomOf="@id/number"
         app:layout_constraintTop_toTopOf="@id/details"
-        app:layout_constraintWidth_min="wrap" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_colon"
-        style="@style/TextAppearance.Material3.BodyMedium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=":"
-        android:textAlignment="viewEnd"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/barrier"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/details_title"
-        app:layout_constraintTop_toTopOf="@id/details_title"
         app:layout_constraintWidth_min="wrap" />
 
     <androidx.constraintlayout.widget.Barrier
