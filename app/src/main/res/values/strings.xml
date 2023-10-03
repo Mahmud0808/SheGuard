@@ -39,6 +39,12 @@
     <string name="activity_home_title">Welcome</string>
     <string name="activity_home_desc">%s!</string>
 
+    <string name="activity_profile_title">Profile</string>
+    <string name="activity_profile_desc">Manage your account information</string>
+
+    <string name="activity_edit_profile_title">Edit profile</string>
+    <string name="activity_edit_profile_desc">Change account information</string>
+
     <string name="activity_contacts_title">Contacts</string>
     <string name="activity_contacts_desc">Quick access to trusted contacts</string>
 
