@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.android.sheguard.R;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.databinding.FragmentRegisterBinding;
 import com.android.sheguard.model.UserModel;
@@ -89,7 +90,7 @@ public class RegisterFragment extends Fragment {
         boolean isValid = true;
 
         if (Objects.requireNonNull(binding.etFullName.getText()).toString().trim().isEmpty()) {
-            binding.etFullNameLayout.setError("Please enter your full name");
+            binding.etFullNameLayout.setError(getString(R.string.please_enter_your_full_name));
             isValid = false;
         } else {
             binding.etFullNameLayout.setErrorEnabled(false);
@@ -97,10 +98,10 @@ public class RegisterFragment extends Fragment {
         }
 
         if (Objects.requireNonNull(binding.etEmail.getText()).toString().trim().isEmpty()) {
-            binding.etEmailLayout.setError("Please enter your email");
+            binding.etEmailLayout.setError(getString(R.string.please_enter_your_email));
             isValid = false;
         } else if (!isValidEmail(binding.etEmail.getText().toString().trim())) {
-            binding.etEmailLayout.setError("Please enter a valid email");
+            binding.etEmailLayout.setError(getString(R.string.please_enter_a_valid_email));
             isValid = false;
         } else {
             binding.etEmailLayout.setErrorEnabled(false);
@@ -108,10 +109,10 @@ public class RegisterFragment extends Fragment {
         }
 
         if (Objects.requireNonNull(binding.etPhone.getText()).toString().trim().isEmpty()) {
-            binding.etPhoneLayout.setError("Please enter your phone number");
+            binding.etPhoneLayout.setError(getString(R.string.please_enter_your_phone_number));
             isValid = false;
         } else if (binding.etPhone.getText().toString().trim().length() < 10) {
-            binding.etPhoneLayout.setError("Please enter a valid phone number");
+            binding.etPhoneLayout.setError(getString(R.string.please_enter_a_valid_phone_number));
             isValid = false;
         } else {
             binding.etPhoneLayout.setErrorEnabled(false);
@@ -119,7 +120,7 @@ public class RegisterFragment extends Fragment {
         }
 
         if (Objects.requireNonNull(binding.etPassword.getText()).toString().trim().isEmpty()) {
-            binding.etPasswordLayout.setError("Please enter your password");
+            binding.etPasswordLayout.setError(getString(R.string.please_enter_your_password));
             isValid = false;
         } else {
             binding.etPasswordLayout.setErrorEnabled(false);
@@ -127,7 +128,7 @@ public class RegisterFragment extends Fragment {
         }
 
         if (Objects.requireNonNull(binding.etConfirmPassword.getText()).toString().trim().isEmpty()) {
-            binding.etConfirmPasswordLayout.setError("Please enter your password again");
+            binding.etConfirmPasswordLayout.setError(getString(R.string.please_enter_your_password_again));
             isValid = false;
         } else {
             binding.etConfirmPasswordLayout.setErrorEnabled(false);
@@ -136,11 +137,11 @@ public class RegisterFragment extends Fragment {
 
         if (!binding.etPassword.getText().toString().trim().isEmpty() && !binding.etConfirmPassword.getText().toString().trim().isEmpty()) {
             if (!binding.etPassword.getText().toString().trim().equals(binding.etConfirmPassword.getText().toString().trim())) {
-                binding.etConfirmPasswordLayout.setError("Password does not match");
+                binding.etConfirmPasswordLayout.setError(getString(R.string.password_does_not_match));
                 isValid = false;
             } else {
                 if (!isValidPassword(binding.etPassword.getText().toString().trim())) {
-                    binding.etConfirmPasswordLayout.setError("Password must contain at least 8 characters, 1 digit, 1 lower case letter, 1 upper case letter and no white spaces");
+                    binding.etConfirmPasswordLayout.setError(getString(R.string.password_constraints));
                     isValid = false;
                 } else {
                     binding.etConfirmPasswordLayout.setErrorEnabled(false);

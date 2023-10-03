@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="24dp"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textColor="@color/text_color_primary"
                 android:textSize="32sp" />
 
@@ -60,7 +60,7 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="36dp"
-                android:text="Create your account and start your journey"
+                android:text="@string/create_your_account"
                 android:textColor="@color/text_color_primary"
                 android:textSize="15sp" />
 
@@ -85,7 +85,7 @@
                     android:id="@+id/et_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Full name"
+                    android:hint="@string/full_name"
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
                     android:singleLine="true" />
@@ -113,7 +113,7 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
@@ -141,7 +141,7 @@
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone"
+                    android:hint="@string/phone"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
                     android:singleLine="true" />
@@ -169,7 +169,7 @@
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword|textNoSuggestions"
                     android:singleLine="true" />
@@ -197,7 +197,7 @@
                     android:id="@+id/et_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm password"
+                    android:hint="@string/confirm_password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword|textNoSuggestions"
                     android:singleLine="true" />
@@ -211,7 +211,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="12dp"
                 android:minHeight="@dimen/button_height"
-                android:text="Register"
+                android:text="@string/btn_register"
                 android:textSize="16sp"
                 app:cornerRadius="@dimen/component_corner_radius" />
 
@@ -233,7 +233,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Already have an account? "
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/already_have_account"
                     android:textColor="@color/text_color_secondary"
                     android:textSize="15sp" />
 
@@ -243,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Sign in"
+                    android:text="@string/sign_in"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15sp" />
 

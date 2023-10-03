@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:justificationMode="inter_word"
-                android:text="In recent years, we've witnessed a surge in incidents targeting women, children, and the elderly. These atrocities have grown increasingly alarming, urging us to seek a solution. Introducing SheGuard, our innovative response to these challenges.\n\nSheGuard empowers you by putting your safety back into your hands. We've developed a comprehensive SMS Alert system that keeps your family and friends informed during times of distress."
+                android:text="@string/background_story"
                 android:textColor="@color/text_color_secondary"
                 android:textSize="15sp" />
 
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
-                android:text="What\'s Good About This App?"
+                android:text="@string/whats_good"
                 android:textAlignment="center" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Intuitive Design"
+                android:text="@string/intuitive_design"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:justificationMode="inter_word"
-                    android:text="Experience seamless navigation through our app, designed with the principles of material design, ensuring both functionality and aesthetics."
+                    android:text="@string/intuitive_design_desc"
                     android:textColor="@color/text_color_secondary"
                     android:textSize="15sp" />
 
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Effortless Registration"
+                android:text="@string/effortless_registration"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
-                    android:text="Join our community swiftly with our hassle-free, multi-option registration process. Your safety is just moments away."
+                    android:text="@string/effortless_registration_desc"
                     android:textColor="@color/text_color_secondary"
                     android:textSize="15sp" />
 
@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Automatic Alerts"
+                android:text="@string/automatic_alerts"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
-                    android:text="SheGuard provides you with an instant lifeline. A simple press of the SOS button sends automated SMS alerts to your selected contacts, including your precise location."
+                    android:text="@string/automatic_alerts_desc"
                     android:textColor="@color/text_color_secondary"
                     android:textSize="15sp" />
 
@@ -178,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
-                android:text="Meet The Developer"
+                android:text="@string/meet_the_developer"
                 android:textAlignment="center" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -194,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Mahmudul Hasan Khan"
+                android:text="@string/dev_name"
                 android:textAlignment="center"
                 android:textColor="@color/text_color_primary"
                 android:textSize="16sp"
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Passionate Android Developer\nOpen-source contributor"
+                android:text="@string/dev_bio"
                 android:textAlignment="center"
                 android:textColor="@color/text_color_secondary"
                 android:textSize="15sp" />
@@ -217,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:text="Github"
+                android:text="@string/github"
                 android:textAlignment="center"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="15sp" />

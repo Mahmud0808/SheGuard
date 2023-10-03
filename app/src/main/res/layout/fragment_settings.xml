@@ -52,14 +52,14 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Shake detection"
+                        android:text="@string/shake_detection"
                         android:textColor="@color/text_color_primary" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Send SOS when you shake your phone. This requires accelerometer sensor."
+                        android:text="@string/shake_detection_desc"
                         android:textColor="@color/text_color_secondary" />
 
                 </LinearLayout>
@@ -108,14 +108,14 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Send SMS"
+                        android:text="@string/send_sms"
                         android:textColor="@color/text_color_primary" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Use SMS service to send SOS. Carrier charges may apply."
+                        android:text="@string/send_sms_desc"
                         android:textColor="@color/text_color_secondary" />
 
                 </LinearLayout>
@@ -164,14 +164,14 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Send notification"
+                        android:text="@string/send_notification"
                         android:textColor="@color/text_color_primary" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Use Notification service to send SOS. Your contacts must have account."
+                        android:text="@string/send_notification_desc"
                         android:textColor="@color/text_color_secondary" />
 
                 </LinearLayout>
@@ -220,14 +220,14 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Play siren"
+                        android:text="@string/play_siren"
                         android:textColor="@color/text_color_primary" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Play fake police siren at full volume in emergency mode."
+                        android:text="@string/play_siren_desc"
                         android:textColor="@color/text_color_secondary" />
 
                 </LinearLayout>
@@ -275,14 +275,14 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Call emergency service"
+                        android:text="@string/call_emergency_service"
                         android:textColor="@color/text_color_primary" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Automatically call national emergency service in emergency mode."
+                        android:text="@string/call_emergency_service_desc"
                         android:textColor="@color/text_color_secondary" />
 
                 </LinearLayout>

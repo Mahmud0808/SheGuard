@@ -12,6 +12,7 @@ import com.android.sheguard.databinding.ActivityMainBinding;
 import com.android.sheguard.util.ObservableVariable;
 import com.google.firebase.auth.FirebaseAuth;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity {
 
     public static ObservableVariable<Boolean> shakeDetection = new ObservableVariable<>();

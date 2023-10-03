@@ -19,6 +19,7 @@ import com.android.sheguard.ui.adapter.HelplineAdapter;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class HelplineFragment extends Fragment {
 
     private final ArrayList<HelplineModel> helplines = new ArrayList<>();
@@ -40,64 +41,73 @@ public class HelplineFragment extends Fragment {
         }
 
         helplines.add(new HelplineModel(
-                "Government helpline number for Violence against women / prevention of child marriage",
-                "Multi sectoral referral and psychosocial support; This is the main helpline number to call and has been/being circulated nationwide.",
-                "109"
+                getString(R.string.helpline_name1),
+                getString(R.string.helpline_desc1),
+                getString(R.string.helpline_num1)
         ));
         helplines.add(new HelplineModel(
-                "National Emergency Hotline Number",
-                "Immediate services to police and hospitals.",
-                "999"
+                getString(R.string.helpline_name2),
+                getString(R.string.helpline_desc2),
+                getString(R.string.helpline_num2)
         ));
         helplines.add(new HelplineModel(
-                "National Hotline Number",
-                "Immediate reports/help for any social problems from enquiring after COVID 19 to child marriage and sexual harassment cases.",
-                "333"
+                getString(R.string.helpline_name3),
+                getString(R.string.helpline_desc3),
+                getString(R.string.helpline_num3)
         ));
         helplines.add(new HelplineModel(
-                "National helpline center for violence against women",
-                "Immediate service to victims and links up to relevant agencies: doctors, counselors, lawyers, DNA experts, police officers.",
-                "10921"
+                getString(R.string.helpline_name4),
+                getString(R.string.helpline_desc4),
+                getString(R.string.helpline_num4)
         ));
         helplines.add(new HelplineModel(
-                "Kaan Pete Roi",
-                "Mental Health & Psychosocial helpline.",
-                "01779554391", "01779554392", "01688709965", "01688709966", "1985275286", "1852035634", "1517969150"
+                getString(R.string.helpline_name5),
+                getString(R.string.helpline_desc5),
+                getString(R.string.helpline_num5_1),
+                getString(R.string.helpline_num5_2),
+                getString(R.string.helpline_num5_3),
+                getString(R.string.helpline_num5_4),
+                getString(R.string.helpline_num5_5),
+                getString(R.string.helpline_num5_6),
+                getString(R.string.helpline_num5_7)
         ));
         helplines.add(new HelplineModel(
-                "Moner Bondhu",
-                "Mental Health & Psychosocial helpline.",
-                "1776632344"
+                getString(R.string.helpline_name6),
+                getString(R.string.helpline_desc6),
+                getString(R.string.helpline_num6)
         ));
         helplines.add(new HelplineModel(
-                "Sajida Foundation",
-                "Mental Health & Psychosocial helpline. (9AM - 5PM)",
-                "9678771511", "01777771515 (9AM - 5PM)"
+                getString(R.string.helpline_name7),
+                getString(R.string.helpline_desc7),
+                getString(R.string.helpline_num7_1),
+                getString(R.string.helpline_num7_2)
         ));
         helplines.add(new HelplineModel(
-                "Dosh Unisher Mor Helpdesk for GBV/SRHR/psychosocial support.",
-                "Mental Health & Psychosocial helpline.",
-                "9612600600"
+                getString(R.string.helpline_name8),
+                getString(R.string.helpline_desc8),
+                getString(R.string.helpline_num8)
         ));
         helplines.add(new HelplineModel(
-                "Ain o Salish Kendra (ASK)",
-                "Legal assistance, emergency shelter and mental healthcare.",
-                "01724415677 (9AM - 5PM)"
+                getString(R.string.helpline_name9),
+                getString(R.string.helpline_desc9),
+                getString(R.string.helpline_num9)
         ));
         helplines.add(new HelplineModel(
-                "Bandhu Social Welfare Society (In collaboration with Ministry of Social Welfare)",
-                "Psychosocial support as well as guideline for SRHR and legal aspects.",
-                "01714048418 (SRHR)", "01771 444666 (legal)"
+                getString(R.string.helpline_name10),
+                getString(R.string.helpline_desc10),
+                getString(R.string.helpline_num10_1),
+                getString(R.string.helpline_num10_2)
         ));
         helplines.add(new HelplineModel(
-                "Friendship Bangladesh",
-                "Advices on primary healthcare, SGBV and psychosocial support.",
-                "01880081111 (24/7 Helpline) based in Cox's Bazar"
+                getString(R.string.helpline_name11),
+                getString(R.string.helpline_desc11),
+                getString(R.string.helpline_num11)
         ));
         helplines.add(new HelplineModel(
-                "Action Against Hunger (ACF BD)",
-                "Psychosocial support and case management.",
-                "01888066747 (For Chittagong Region, including Cox’s Bazar district)", "01869859757 (For Dhaka and rest of the districts)"
+                getString(R.string.helpline_name12),
+                getString(R.string.helpline_desc12),
+                getString(R.string.helpline_num12_1),
+                getString(R.string.helpline_num12_2)
         ));
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));

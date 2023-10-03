@@ -115,10 +115,10 @@ public class ProfileFragment extends Fragment {
 
     private void getCurrentLocation() {
         if (!isGPSEnabled()) {
-            binding.tvLocation.setText("GPS is not enabled");
+            binding.tvLocation.setText(R.string.gps_is_not_enabled);
             return;
         } else {
-            binding.tvLocation.setText("Getting location...");
+            binding.tvLocation.setText(R.string.getting_location);
         }
 
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -168,10 +168,10 @@ public class ProfileFragment extends Fragment {
 
                                         binding.tvLocation.setText(address.toString());
                                     } else {
-                                        binding.tvLocation.setText("Failed to get location");
+                                        binding.tvLocation.setText(getString(R.string.failed_to_get_location));
                                     }
                                 } catch (IOException e) {
-                                    binding.tvLocation.setText("Failed to get location");
+                                    binding.tvLocation.setText(getString(R.string.failed_to_get_location));
                                     e.printStackTrace();
                                 }
                             }

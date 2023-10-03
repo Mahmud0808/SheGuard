@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment {
                     verifyEmailDialog.hide();
 
                     if (task.isSuccessful()) {
-                        Snackbar.make(view, "Verification email sent", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view, getString(R.string.verification_email_sent), Snackbar.LENGTH_SHORT).show();
                     } else {
                         if (getContext() != null) {
                             Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -96,7 +96,7 @@ public class LoginFragment extends Fragment {
                     verifyEmailDialog.hide();
 
                     if (task.isSuccessful()) {
-                        Snackbar.make(view, "Password reset email sent", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view, getString(R.string.password_reset_email_sent), Snackbar.LENGTH_SHORT).show();
                     } else {
                         if (getContext() != null) {
                             Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -106,7 +106,7 @@ public class LoginFragment extends Fragment {
 
         binding.tvForgotPassword.setOnClickListener(v -> {
             if (Objects.requireNonNull(binding.etEmail.getText()).toString().trim().isEmpty()) {
-                Snackbar.make(view, "Enter your email address", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, getString(R.string.enter_your_email_address), Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
@@ -128,7 +128,7 @@ public class LoginFragment extends Fragment {
         boolean isValid = true;
 
         if (Objects.requireNonNull(binding.etEmail.getText()).toString().trim().isEmpty()) {
-            binding.etEmailLayout.setError("Email is required");
+            binding.etEmailLayout.setError(getString(R.string.email_is_required));
             isValid = false;
         } else {
             binding.etEmailLayout.setErrorEnabled(false);
@@ -136,7 +136,7 @@ public class LoginFragment extends Fragment {
         }
 
         if (Objects.requireNonNull(binding.etPassword.getText()).toString().trim().isEmpty()) {
-            binding.etPasswordLayout.setError("Password is required");
+            binding.etPasswordLayout.setError(getString(R.string.password_is_required));
             isValid = false;
         } else {
             binding.etPasswordLayout.setErrorEnabled(false);

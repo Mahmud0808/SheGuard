@@ -37,7 +37,7 @@
                     android:shadowDx="-4"
                     android:shadowDy="-4"
                     android:shadowRadius="4"
-                    android:text="SOS"
+                    android:text="@string/sos"
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnError"
                     android:textSize="60sp" />
@@ -82,7 +82,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Profile"
+                        android:text="@string/activity_profile_title"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -91,7 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Manage your account information"
+                        android:text="@string/activity_profile_desc"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="15sp"
                         tools:ignore="NestedWeights" />
@@ -126,7 +126,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Contacts"
+                        android:text="@string/activity_contacts_title"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -135,7 +135,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Quick access to trusted contacts"
+                        android:text="@string/activity_contacts_desc"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="15sp"
                         tools:ignore="NestedWeights" />
@@ -177,7 +177,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Helpline"
+                        android:text="@string/activity_helpline_title"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -186,7 +186,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Support from local authorities"
+                        android:text="@string/activity_helpline_desc"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="15sp"
                         tools:ignore="NestedWeights" />
@@ -221,7 +221,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Safety tips"
+                        android:text="@string/activity_safety_tips_title"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -230,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Access a wealth of safety resources"
+                        android:text="@string/activity_safety_tips_desc"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="15sp"
                         tools:ignore="NestedWeights" />
@@ -274,7 +274,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Settings"
+                        android:text="@string/activity_settings_title"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -283,7 +283,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Customize your safety experience"
+                        android:text="@string/activity_settings_desc"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="15sp"
                         tools:ignore="NestedWeights" />
@@ -318,7 +318,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="About"
+                        android:text="@string/activity_about_title"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -327,7 +327,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Learn more about our mission"
+                        android:text="@string/activity_about_desc"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="15sp"
                         tools:ignore="NestedWeights" />

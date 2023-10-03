@@ -44,9 +44,9 @@ public class ContactsFragment extends Fragment {
     public static void removeContact(Context context, int idx) {
         View tvEmptyList = ((AppCompatActivity) context).findViewById(R.id.tv_empty_list);
         new MaterialAlertDialogBuilder(context, R.style.MaterialComponents_MaterialAlertDialog)
-                .setMessage("Are you sure you want to remove this contact?")
+                .setMessage(context.getString(R.string.remove_contact_confirmation))
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setPositiveButton(context.getString(R.string.yes), (dialog, which) -> {
                     if (contacts.size() == 0 || idx >= contacts.size()) {
                         return;
                     }
@@ -59,9 +59,9 @@ public class ContactsFragment extends Fragment {
                     Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
 
                     tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
-                    Snackbar.make(((AppCompatActivity) context).findViewById(R.id.fragmentContainerView), "Contact removed successfully", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(((AppCompatActivity) context).findViewById(R.id.fragmentContainerView), context.getString(R.string.contact_removed_successfully), Snackbar.LENGTH_SHORT).show();
                 })
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .setNegativeButton(context.getString(R.string.no), (dialog, which) -> dialog.dismiss())
                 .show();
     }
 

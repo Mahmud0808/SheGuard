@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="24dp"
-                android:text="Sign In"
+                android:text="@string/sign_in"
                 android:textColor="@color/text_color_primary"
                 android:textSize="32sp" />
 
@@ -60,7 +60,7 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="36dp"
-                android:text="Please sign in to your account first"
+                android:text="@string/please_sign_in"
                 android:textColor="@color/text_color_primary"
                 android:textSize="15sp" />
 
@@ -85,7 +85,7 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
@@ -113,7 +113,7 @@
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword|textNoSuggestions"
                     android:singleLine="true" />
@@ -128,7 +128,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginVertical="24dp"
-                android:text="Forgot password?"
+                android:text="@string/forgot_password"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="15sp" />
 
@@ -140,7 +140,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="12dp"
                 android:minHeight="@dimen/button_height"
-                android:text="Sign in"
+                android:text="@string/btn_sign_in"
                 android:textSize="16sp"
                 app:cornerRadius="@dimen/component_corner_radius" />
 
@@ -162,7 +162,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Don't have an account yet? "
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/dont_have_account"
                     android:textColor="@color/text_color_secondary"
                     android:textSize="15sp" />
 
@@ -172,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Sign up"
+                    android:text="@string/btn_sign_up"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15sp" />
 

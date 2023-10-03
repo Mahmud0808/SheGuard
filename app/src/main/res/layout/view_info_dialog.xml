@@ -26,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Title"
         android:textAlignment="center" />
 
     <ScrollView
@@ -44,7 +43,6 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:justificationMode="inter_word"
-            android:text="Body"
             android:textAlignment="center" />
 
     </ScrollView>
@@ -56,7 +54,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingHorizontal="56dp"
-        android:text="Close"
+        android:text="@string/btn_close"
         android:textSize="16sp"
         app:cornerRadius="@dimen/component_corner_radius" />
 

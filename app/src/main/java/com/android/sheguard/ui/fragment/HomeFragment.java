@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
 
         ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.header.toolbar);
         binding.header.collapsingToolbar.setTitle(getString(R.string.activity_home_title));
-        binding.header.collapsingToolbar.setSubtitle(getString(R.string.activity_home_desc, "How are you?"));
+        binding.header.collapsingToolbar.setSubtitle(getString(R.string.activity_home_desc, getString(R.string.unknown_user)));
         setUserNameOnTitle();
 
         NotificationManager notificationManager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
             if (!SosService.isRunning) {
                 if (AppUtil.permissionsGranted(getContext()) && SosUtil.isGPSEnabled(requireContext())) {
                     SosUtil.startSosNotificationService(requireContext());
-                    Snackbar.make(requireActivity().findViewById(android.R.id.content), "Service Started!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.service_started), Snackbar.LENGTH_LONG).show();
                 } else if (!AppUtil.permissionsGranted(getContext())) {
                     multiplePermissions.launch(AppUtil.REQUIRED_PERMISSIONS);
                 } else {
@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
                 }
             } else {
                 SosUtil.stopSosNotificationService(requireContext());
-                Snackbar.make(requireActivity().findViewById(android.R.id.content), "Service Stopped!", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.service_stopped), Snackbar.LENGTH_LONG).show();
             }
 
             updateButtonText();
@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void setUserNameOnTitle() {
-        final String[] userName = {"How are you?"};
+        final String[] userName = {getString(R.string.unknown_user)};
 
         FirebaseFirestore.getInstance()
                 .collection(Constants.FIRESTORE_COLLECTION_USERLIST)
@@ -130,6 +130,14 @@ public class HomeFragment extends Fragment {
                 });
     }
 
+    private void updateButtonText() {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (getContext() != null) {
+                binding.btnShakeDetection.setText(SosService.isRunning ? getString(R.string.btn_stop_service) : getString(R.string.btn_start_service));
+            }
+        }, 200);
+    }
+
     private final ActivityResultLauncher<String[]> multiplePermissions = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
@@ -137,8 +145,8 @@ public class HomeFragment extends Fragment {
             while (it.hasNext()) {
                 Map.Entry<String, Boolean> pair = it.next();
                 if (!pair.getValue()) {
-                    Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Permission Must Be Granted!", Snackbar.LENGTH_INDEFINITE);
-                    snackbar.setAction("Grant", v -> {
+                    Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.permission_must_be_granted, Snackbar.LENGTH_INDEFINITE);
+                    snackbar.setAction(R.string.grant, v -> {
                         multiplePermissions.launch(new String[]{pair.getKey()});
                         snackbar.dismiss();
                     });
@@ -152,11 +160,5 @@ public class HomeFragment extends Fragment {
         }
     });
 
-    private void updateButtonText() {
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            if (getContext() != null) {
-                binding.btnShakeDetection.setText(SosService.isRunning ? getString(R.string.btn_stop_service) : getString(R.string.btn_start_service));
-            }
-        }, 200);
-    }
+
 }

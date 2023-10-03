@@ -84,7 +84,7 @@ public class EditProfileFragment extends Fragment {
                                             binding.etNewName.setText("");
                                             binding.etNewPhone.setText("");
 
-                                            Snackbar.make(binding.getRoot(), "Details saved successfully", Snackbar.LENGTH_SHORT).show();
+                                            Snackbar.make(binding.getRoot(), getString(R.string.details_saved_successfully), Snackbar.LENGTH_SHORT).show();
                                         } else {
                                             if (getContext() != null) {
                                                 Toast.makeText(getContext(), Objects.requireNonNull(task2.getException()).getMessage(), Toast.LENGTH_SHORT).show();

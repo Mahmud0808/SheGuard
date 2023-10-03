@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.android.sheguard.R;
 import com.android.sheguard.databinding.FragmentAboutBinding;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class AboutFragment extends Fragment {
 
     private FragmentAboutBinding binding;
@@ -33,7 +34,7 @@ public class AboutFragment extends Fragment {
             binding.header.collapsingToolbar.setSubtitle(getString(R.string.activity_about_desc));
         }
 
-        binding.tvGithub.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://github.com/Mahmud0808"))));
+        binding.tvGithub.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.dev_github_link)))));
 
         return view;
     }

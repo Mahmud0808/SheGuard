@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
-                android:text="Contact list is empty"
+                android:text="@string/contact_empty"
                 android:textAlignment="center"
                 android:textColor="@color/text_color_secondary"
                 android:textSize="16sp"

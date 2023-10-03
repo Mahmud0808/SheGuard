@@ -1,15 +1,13 @@
 <resources>
-    <string name="app_name">SheGuard</string>
+    <string name="app_name" translatable="false">SheGuard</string>
     <string name="app_moto">Your safety in your hands</string>
 
     <string name="onboarding_slide1_title">Welcome to SheGuard</string>
     <string name="onboarding_slide1_subtitle">Your personal guardian app for women\'s safety</string>
     <string name="onboarding_slide1_desc">SheGuard empowers and protects you. Let\'s start your journey toward safety and peace of mind.</string>
-
     <string name="onboarding_slide2_title">Your Safety, Your Way</string>
     <string name="onboarding_slide2_subtitle">Customized protection at your fingertips</string>
     <string name="onboarding_slide2_desc">Tailor SheGuard to your preferences, choosing the features that matter most.</string>
-
     <string name="onboarding_slide3_title">A Supportive Community</string>
     <string name="onboarding_slide3_subtitle">Be more independent and feel the happiness</string>
     <string name="onboarding_slide3_desc">Join our community of strong women, access resources, and stand together for safety and empowerment.</string>
@@ -20,7 +18,6 @@
 
     <string name="email_verification">Please verify your email</string>
     <string name="email_verification_description"><![CDATA[You\'re almost there! We sent an email to <b>%s</b><br /><br />Just click on the link in that email to complete your signup. If you don\'t see it, you may need to <b>check your spam</b> folder.]]></string>
-
     <string name="email_reset">Please check your email</string>
     <string name="email_reset_description"><![CDATA[You\'re almost there! We sent an email to <b>%s</b><br /><br />Just click on the link in that email to reset your password. If you don\'t see it, you may need to <b>check your spam</b> folder.]]></string>
 
@@ -32,33 +29,106 @@
     <string name="notification_emergency_mode">%s is now in Emergency Mode</string>
     <string name="sos_message">Hey %s,\nI\'m in Danger!\nMy location: %s</string>
     <string name="sos_notification">I\'m in Danger! My location: %s</string>
-
     <string name="btn_start_service">Start Shake Detection</string>
     <string name="btn_stop_service">Stop Shake Detection</string>
 
     <string name="activity_home_title">Welcome</string>
     <string name="activity_home_desc">%s!</string>
-
     <string name="activity_profile_title">Profile</string>
     <string name="activity_profile_desc">Manage your account information</string>
-
-    <string name="activity_edit_profile_title">Edit profile</string>
+    <string name="activity_edit_profile_title">Edit Profile</string>
     <string name="activity_edit_profile_desc">Change account information</string>
-
     <string name="activity_contacts_title">Contacts</string>
     <string name="activity_contacts_desc">Quick access to trusted contacts</string>
-
     <string name="activity_helpline_title">Helpline</string>
     <string name="activity_helpline_desc">Support from local authorities</string>
-
     <string name="activity_settings_title">Settings</string>
     <string name="activity_settings_desc">Customize your safety experience</string>
-
     <string name="activity_safety_tips_title">Safety tips</string>
     <string name="activity_safety_tips_desc">Access a wealth of safety resources</string>
-
     <string name="activity_about_title">About</string>
     <string name="activity_about_desc">Learn more about our mission</string>
+
+    <string name="background_story">In recent years, we\'ve witnessed a surge in incidents targeting women, children, and the elderly. These atrocities have grown increasingly alarming, urging us to seek a solution. Introducing SheGuard, our innovative response to these challenges.\n\nSheGuard empowers you by putting your safety back into your hands. We\'ve developed a comprehensive SMS Alert system that keeps your family and friends informed during times of distress.</string>
+    <string name="whats_good">What\'s Good About This App?</string>
+    <string name="intuitive_design">Intuitive Design</string>
+    <string name="intuitive_design_desc">Experience seamless navigation through our app, designed with the principles of material design, ensuring both functionality and aesthetics.</string>
+    <string name="effortless_registration">Effortless Registration</string>
+    <string name="effortless_registration_desc">Join our community swiftly with our hassle-free, multi-option registration process. Your safety is just moments away.</string>
+    <string name="automatic_alerts">Automatic Alerts</string>
+    <string name="automatic_alerts_desc">SheGuard provides you with an instant lifeline. A simple press of the SOS button sends automated SMS alerts to your selected contacts, including your precise location.</string>
+    <string name="meet_the_developer">Meet The Developer</string>
+    <string name="dev_name">Mahmudul Hasan Khan</string>
+    <string name="dev_bio">Passionate Android Developer\nOpen-source contributor</string>
+    <string name="github">Github</string>
+    <string name="contact_empty">Contact list is empty</string>
+    <string name="new_name">New name</string>
+    <string name="new_phone">New phone</string>
+    <string name="btn_save">Save</string>
+    <string name="sos">SOS</string>
+    <string name="sign_in">Sign In</string>
+    <string name="please_sign_in">Please sign in to your account first</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="dont_have_account">Don\'t have an account yet?</string>
+    <string name="btn_sign_up">Sign up</string>
+    <string name="btn_edit_profile">Edit profile</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="location">Location</string>
+    <string name="btn_log_out">Log out</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_your_account">Create your account and start your journey</string>
+    <string name="full_name">Full name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="btn_register">Register</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="phone_number">Phone number</string>
+    <string name="btn_add_contact">Add contact</string>
+    <string name="details">Details</string>
+    <string name="btn_close">Close</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="shake_detection">Shake detection</string>
+    <string name="shake_detection_desc">Send SOS when you shake your phone. This requires accelerometer sensor.</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="send_sms_desc">Use SMS service to send SOS. Carrier charges may apply.</string>
+    <string name="send_notification">Send notification</string>
+    <string name="send_notification_desc">Use Notification service to send SOS. Your contacts must have account.</string>
+    <string name="play_siren">Play siren</string>
+    <string name="play_siren_desc">Play fake police siren at full volume in emergency mode.</string>
+    <string name="call_emergency_service">Call emergency service</string>
+    <string name="call_emergency_service_desc">Automatically call national emergency service in emergency mode.</string>
+    <string name="btn_resend_email">Resend Email</string>
+    <string name="dev_github_link" translatable="false">https://github.com/Mahmud0808</string>
+    <string name="remove_contact_confirmation">Are you sure you want to remove this contact?</string>
+    <string name="contact_removed_successfully">Contact removed successfully</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="details_saved_successfully">Details saved successfully</string>
+    <string name="service_started">Service Started!</string>
+    <string name="service_stopped">Service Stopped!</string>
+    <string name="unknown_user">Unknown user</string>
+    <string name="permission_must_be_granted">Permission Must Be Granted!</string>
+    <string name="grant">Grant</string>
+    <string name="verification_email_sent">Verification email sent</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="password_reset_email_sent">Password reset email sent</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="gps_is_not_enabled">GPS is not enabled</string>
+    <string name="getting_location">Getting location…</string>
+    <string name="failed_to_get_location">Failed to get location</string>
+    <string name="please_enter_your_full_name">Please enter your full name</string>
+    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="please_enter_a_valid_email">Please enter a valid email</string>
+    <string name="please_enter_your_phone_number">Please enter your phone number</string>
+    <string name="please_enter_a_valid_phone_number">Please enter a valid phone number</string>
+    <string name="please_enter_your_password">Please enter your password</string>
+    <string name="please_enter_your_password_again">Please enter your password again</string>
+    <string name="password_does_not_match">Password does not match</string>
+    <string name="password_constraints">Password must contain at least 8 characters, 1 digit, 1 lower case letter, 1 upper case letter and no white spaces</string>
 
     <string name="safety_tips_tip_1">Be Alert! Scan the area as you walk. Be aware of your surroundings and walk with confidence.</string>
     <string name="safety_tips_tip_2">Avoid shopping alone. Try to shop with a friend or relative.</string>
@@ -81,6 +151,50 @@
     <string name="safety_tips_tip_19">Don\'t check-in on social media apps when you arrive somewhere. Instead, check in as you leave. This way no one will be able to digitally stalk you and know your every move or when you\'re not at home. Along the same lines, avoid tweeting or using Facebook from vacation, especially if your account is public, as it is a way of letting the world know your home is unoccupied.</string>
     <string name="safety_tips_tip_20">When you move into a new residence, check areas for possible hidden cameras. Your landlord, previous tenant or previous owner could be spying on you.</string>
     <string name="safety_tips_tip_21">Unfortunately, no matter how diligently we practice awareness and avoidance techniques, we may find ourselves in a physical confrontation. If available, it is suggested to take self defense training.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="helpline_name1">Government helpline number for Violence against women / prevention of child marriage</string>
+    <string name="helpline_name2">National Emergency Hotline Number</string>
+    <string name="helpline_name3">National Hotline Number</string>
+    <string name="helpline_name4">National helpline center for violence against women</string>
+    <string name="helpline_name5">Kaan Pete Roi</string>
+    <string name="helpline_name6">Moner Bondhu</string>
+    <string name="helpline_name7">Sajida Foundation</string>
+    <string name="helpline_name8">Dosh Unisher Mor Helpdesk for GBV/SRHR/psychosocial support.</string>
+    <string name="helpline_name9">Ain o Salish Kendra (ASK)</string>
+    <string name="helpline_name10">Bandhu Social Welfare Society (In collaboration with Ministry of Social Welfare)</string>
+    <string name="helpline_name11">Friendship Bangladesh</string>
+    <string name="helpline_name12">Action Against Hunger (ACF BD)</string>
+    <string name="helpline_desc1">Multi sectoral referral and psychosocial support; This is the main helpline number to call and has been/being circulated nationwide.</string>
+    <string name="helpline_desc2">Immediate services to police and hospitals.</string>
+    <string name="helpline_desc3">Immediate reports/help for any social problems from enquiring after COVID 19 to child marriage and sexual harassment cases.</string>
+    <string name="helpline_desc4">Immediate service to victims and links up to relevant agencies: doctors, counselors, lawyers, DNA experts, police officers.</string>
+    <string name="helpline_desc5"><![CDATA[Mental Health & Psychosocial helpline.]]></string>
+    <string name="helpline_desc6"><![CDATA[Mental Health & Psychosocial helpline.]]></string>
+    <string name="helpline_desc7"><![CDATA[Mental Health & Psychosocial helpline. (9AM - 5PM)]]></string>
+    <string name="helpline_desc8"><![CDATA[Mental Health & Psychosocial helpline.]]></string>
+    <string name="helpline_desc9">Legal assistance, emergency shelter and mental healthcare.</string>
+    <string name="helpline_desc10">Psychosocial support as well as guideline for SRHR and legal aspects.</string>
+    <string name="helpline_desc11">Advices on primary healthcare, SGBV and psychosocial support.</string>
+    <string name="helpline_desc12">Psychosocial support and case management.</string>
+    <string name="helpline_num1">109</string>
+    <string name="helpline_num2">999</string>
+    <string name="helpline_num3">333</string>
+    <string name="helpline_num4">10921</string>
+    <string name="helpline_num6">1776632344</string>
+    <string name="helpline_num7_1">9678771511</string>
+    <string name="helpline_num7_2">01777771515 (9AM - 5PM)</string>
+    <string name="helpline_num8">9612600600</string>
+    <string name="helpline_num9">01724415677 (9AM - 5PM)</string>
+    <string name="helpline_num10_1">01714048418 (SRHR)</string>
+    <string name="helpline_num10_2">01771 444666 (legal)</string>
+    <string name="helpline_num11">01880081111 (24/7 Helpline) based in Cox\'s Bazar</string>
+    <string name="helpline_num12_1">01888066747 (For Chittagong Region, including Cox’s Bazar district)</string>
+    <string name="helpline_num12_2">01869859757 (For Dhaka and rest of the districts)</string>
+    <string name="helpline_num5_1">01779554391</string>
+    <string name="helpline_num5_2">01779554392</string>
+    <string name="helpline_num5_3">01688709965</string>
+    <string name="helpline_num5_4">01688709966</string>
+    <string name="helpline_num5_5">1985275286</string>
+    <string name="helpline_num5_6">1852035634</string>
+    <string name="helpline_num5_7">1517969150</string>
 </resources>

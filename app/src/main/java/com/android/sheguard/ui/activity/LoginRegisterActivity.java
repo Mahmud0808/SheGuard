@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import com.android.sheguard.R;
 import com.android.sheguard.databinding.ActivityLoginRegisterBinding;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class LoginRegisterActivity extends AppCompatActivity {
 
     private ActivityLoginRegisterBinding binding;

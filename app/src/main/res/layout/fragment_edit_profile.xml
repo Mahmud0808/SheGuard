@@ -62,7 +62,7 @@
                     android:id="@+id/et_new_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="New name"
+                    android:hint="@string/new_name"
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
                     android:singleLine="true" />
@@ -90,7 +90,7 @@
                     android:id="@+id/et_new_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="New phone"
+                    android:hint="@string/new_phone"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
                     android:singleLine="true" />
@@ -104,7 +104,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="12dp"
                 android:minHeight="@dimen/button_height"
-                android:text="Save"
+                android:text="@string/btn_save"
                 android:textSize="16sp"
                 app:cornerRadius="@dimen/component_corner_radius" />
 
