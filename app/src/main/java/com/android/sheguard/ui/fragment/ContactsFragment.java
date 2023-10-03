@@ -1,5 +1,6 @@
 package com.android.sheguard.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ConcatAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.sheguard.R;
 import com.android.sheguard.common.Constants;
@@ -17,6 +20,7 @@ import com.android.sheguard.config.Prefs;
 import com.android.sheguard.databinding.FragmentContactsBinding;
 import com.android.sheguard.model.ContactModel;
 import com.android.sheguard.ui.adapter.ContactsAdapter;
+import com.android.sheguard.ui.adapter.NewContactAdapter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -25,21 +29,24 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+@SuppressLint({"StaticFieldLeak"})
+@SuppressWarnings("FieldCanBeLocal")
 public class ContactsFragment extends Fragment {
 
-    private static ArrayList<ContactModel> contacts;
-    private static ContactsAdapter adapter;
+    public static ArrayList<ContactModel> contacts;
+    public static View tvEmptyList;
+    public static ContactsAdapter adapter;
     private FragmentContactsBinding binding;
 
+    @SuppressLint("NotifyDataSetChanged")
     public static void removeContact(Context context, int idx) {
         View tvEmptyList = ((AppCompatActivity) context).findViewById(R.id.tv_empty_list);
         new MaterialAlertDialogBuilder(context, R.style.MaterialComponents_MaterialAlertDialog)
                 .setMessage("Are you sure you want to remove this contact?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    if (contacts.size() == 0) {
+                    if (contacts.size() == 0 || idx >= contacts.size()) {
                         return;
                     }
 
@@ -57,6 +64,15 @@ public class ContactsFragment extends Fragment {
                 .show();
     }
 
+    public static boolean isPhoneNumberExists(String newNumber) {
+        for (ContactModel contact : contacts) {
+            if (contact.getPhone().equals(newNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentContactsBinding.inflate(inflater, container, false);
@@ -71,6 +87,8 @@ public class ContactsFragment extends Fragment {
             binding.header.collapsingToolbar.setSubtitle(getString(R.string.activity_contacts_desc));
         }
 
+        tvEmptyList = view.findViewById(R.id.tv_empty_list);
+
         contacts = new ArrayList<>();
         Gson gson = new Gson();
         String jsonContacts = Prefs.getString(Constants.CONTACTS_LIST, "");
@@ -80,61 +98,18 @@ public class ContactsFragment extends Fragment {
             contacts.addAll(gson.fromJson(jsonContacts, type));
         }
 
+        new ContactsAdapter(requireContext(), contacts);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new ContactsAdapter(requireContext(), contacts);
-        binding.listView.setAdapter(adapter);
-        binding.listView.setNestedScrollingEnabled(true);
-
-        binding.btnAddContact.setOnClickListener(v -> {
-            String name = Objects.requireNonNull(binding.etAddName.getText()).toString().trim();
-            String number = Objects.requireNonNull(binding.etAddNumber.getText()).toString().trim();
-
-            if (name.isEmpty()) {
-                Snackbar.make(view, "Please enter a name", Snackbar.LENGTH_LONG).show();
-                return;
-            } else if (number.isEmpty()) {
-                Snackbar.make(view, "Please enter a phone number", Snackbar.LENGTH_LONG).show();
-                return;
-            } else if (number.length() < 10) {
-                Snackbar.make(view, "Please enter a valid phone number", Snackbar.LENGTH_LONG).show();
-                return;
-            } else if (isPhoneNumberExists(number)) {
-                Snackbar.make(view, "Contact already exists", Snackbar.LENGTH_LONG).show();
-                return;
-            }
-
-            addContact(name, number);
-        });
-
-        binding.listView.setOnItemLongClickListener((parent, view1, position, id) -> {
-            removeContact(requireContext(), position);
-            return false;
-        });
+        ConcatAdapter concatAdapter = new ConcatAdapter(
+                new NewContactAdapter(requireContext(), view),
+                adapter
+        );
+        binding.recyclerView.setAdapter(concatAdapter);
+        binding.recyclerView.setHasFixedSize(false);
 
         binding.tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
 
         return view;
-    }
-
-    private void addContact(String name, String number) {
-        binding.etAddName.setText("");
-        binding.etAddNumber.setText("");
-        contacts.add(new ContactModel(name, number));
-        adapter.notifyDataSetChanged();
-
-        Gson gson = new Gson();
-        String jsonContacts = gson.toJson(contacts);
-        Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
-
-        binding.tvEmptyList.setVisibility(contacts.size() == 0 ? View.VISIBLE : View.GONE);
-        Snackbar.make(requireView(), "Contact added successfully", Snackbar.LENGTH_SHORT).show();
-    }
-
-    public boolean isPhoneNumberExists(String newNumber) {
-        for (ContactModel contact : contacts) {
-            if (contact.getPhone().equals(newNumber)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
