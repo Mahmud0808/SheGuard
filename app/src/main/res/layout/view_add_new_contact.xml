@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="16dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_add_name_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:boxCornerRadiusBottomEnd="@dimen/component_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/component_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/component_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/component_corner_radius"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_name_small">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_add_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full name"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_add_number_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:boxCornerRadiusBottomEnd="@dimen/component_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/component_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/component_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/component_corner_radius"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_call_small">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_add_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone number"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@android:string/untitled"
+        android:minHeight="@dimen/button_height"
+        android:text="Add contact"
+        android:textSize="16sp"
+        app:cornerRadius="@dimen/component_corner_radius"
+        app:icon="@drawable/ic_done"
+        app:iconGravity="textStart" />
+
+</LinearLayout>

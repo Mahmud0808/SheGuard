@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.sheguard.R;
 import com.android.sheguard.databinding.FragmentHelplineBinding;
@@ -21,6 +23,7 @@ public class HelplineFragment extends Fragment {
 
     private final ArrayList<HelplineModel> helplines = new ArrayList<>();
     private FragmentHelplineBinding binding;
+    private HelplineAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,9 +100,11 @@ public class HelplineFragment extends Fragment {
                 "01888066747 (For Chittagong Region, including Cox’s Bazar district)", "01869859757 (For Dhaka and rest of the districts)"
         ));
 
-        HelplineAdapter adapter = new HelplineAdapter(requireContext(), helplines);
-        binding.listView.setAdapter(adapter);
-        binding.listView.setNestedScrollingEnabled(true);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapter = new HelplineAdapter(requireContext(), helplines);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setHasFixedSize(true);
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         return view;
     }

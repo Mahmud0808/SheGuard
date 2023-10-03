@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.sheguard.R;
 import com.android.sheguard.databinding.FragmentSafetyTipsBinding;
@@ -16,10 +18,12 @@ import com.android.sheguard.ui.adapter.SafetyTipsAdapter;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class SafetyTipsFragment extends Fragment {
 
     private final ArrayList<String> safetyTips = new ArrayList<>();
     private FragmentSafetyTipsBinding binding;
+    private SafetyTipsAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,9 +61,11 @@ public class SafetyTipsFragment extends Fragment {
         safetyTips.add(getString(R.string.safety_tips_tip_20));
         safetyTips.add(getString(R.string.safety_tips_tip_21));
 
-        SafetyTipsAdapter adapter = new SafetyTipsAdapter(requireContext(), safetyTips);
-        binding.listView.setAdapter(adapter);
-        binding.listView.setNestedScrollingEnabled(true);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapter = new SafetyTipsAdapter(requireContext(), safetyTips);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setHasFixedSize(true);
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         return view;
     }
