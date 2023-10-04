@@ -1,11 +1,15 @@
+<div align="center">
+  <img src="https://github.com/Mahmud0808/SheGuard/blob/master/banner.png" width="100%" alt="Banner">
+</div>
+
 # ✨ SheGuard
-SheGuard is women's essential companion for staying safe in any situation. With its easy-to-use features, you can quickly and easily alert your loved ones of your location and contact emergency services.
+SheGuard stands as the quintessential companion for women, ensuring their safety in every circumstance. Through its user-friendly features, it empowers you to swiftly alert your loved ones of your whereabouts and connect with emergency services effortlessly.
 
 ## Screenshots 📱
 <div align="center">
-<img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/onboarding.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/signin.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/signup.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/home.jpg" width="20%" />
-<img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/profile.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/edit_profile.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/contacts.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/helpline.jpg" width="20%" />
-<img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/safety_tips.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/settings.jpg" width="20%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/about.jpg" width="20%" />
+<img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/onboarding.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/signin.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/signup.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/home.jpg" width="15%" />
+<img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/profile.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/edit_profile.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/contacts.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/helpline.jpg" width="15%" />
+<img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/safety_tips.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/settings.jpg" width="15%" /> <img src="https://github.com/Mahmud0808/SheGuard/blob/master/screenshots/about.jpg" width="15%" />
 </div>
 
 ## Features 🔥
@@ -34,7 +38,7 @@ This app uses [***Firebase***](https://firebase.google.com/) services.
 
 ## Build-Tool 🧰
 
-You need to have [Android Studio Giraffe or above](https://developer.android.com/studio/preview) to build this project.
+You need to have [Android Studio Giraffe or above](https://developer.android.com/studio) to build this project.
 
 ## Getting Started 🚀
 
@@ -50,10 +54,10 @@ You need to have [Android Studio Giraffe or above](https://developer.android.com
 
 Wanna reach out to me? DM me at 👇
 
-Drop a mail to:- mahmudul15-13791@diu.edu.bd
+Email: mahmudul15-13791@diu.edu.bd
 
 ## Donation 💰
 
 If this project help you reduce time to develop, you can give me a cup of coffee :)
 
-<a href="https://www.buymeacoffee.com/drdisagree" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<a href="https://www.buymeacoffee.com/DrDisagree"><img src="https://github.com/Mahmud0808/Iconify/blob/beta/.github/resources/bmc-button.png" width="30%" alt="Buy me a coffee" /></a>
