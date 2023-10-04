@@ -72,7 +72,10 @@ public class FireBaseMessageService extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent)
                 .build();
 
-        this.startForeground(1, notification);
+        try {
+            this.startForeground(1, notification);
+        } catch (Exception ignored) {
+        }
         notificationManager.notify(1, notification);
     }
 }
