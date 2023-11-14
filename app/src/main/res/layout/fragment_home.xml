@@ -65,53 +65,10 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/profile"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/margin_8"
-                    android:layout_weight="1"
-                    android:background="@drawable/container"
-                    android:baselineAligned="false"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical"
-                    android:paddingVertical="15dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/activity_profile_title"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/activity_profile_desc"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:textSize="15sp"
-                        tools:ignore="NestedWeights" />
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="start|bottom"
-                        android:layout_marginTop="@dimen/margin_16"
-                        android:contentDescription="@android:string/untitled"
-                        android:src="@drawable/ic_profile"
-                        app:tint="?attr/colorPrimary" />
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/contacts"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_8"
                     android:layout_weight="1"
                     android:background="@drawable/container"
@@ -150,19 +107,12 @@
                         app:tint="?attr/colorPrimary" />
 
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_16"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/helpline"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_8"
                     android:layout_weight="1"
                     android:background="@drawable/container"
@@ -201,12 +151,20 @@
                         app:tint="?attr/colorPrimary" />
 
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/safety_tips"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_8"
                     android:layout_weight="1"
                     android:background="@drawable/container"
@@ -246,64 +204,11 @@
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_16"
-                android:layout_marginBottom="@dimen/margin_8"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/settings"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/margin_8"
-                    android:layout_weight="1"
-                    android:background="@drawable/container"
-                    android:baselineAligned="false"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical"
-                    android:paddingVertical="15dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/activity_settings_title"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/activity_settings_desc"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:textSize="15sp"
-                        tools:ignore="NestedWeights" />
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="start|bottom"
-                        android:layout_marginTop="@dimen/margin_16"
-                        android:contentDescription="@android:string/untitled"
-                        android:src="@drawable/ic_settings"
-                        app:tint="?attr/colorPrimary" />
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/about"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginStart="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_8"
                     android:layout_weight="1"
                     android:background="@drawable/container"

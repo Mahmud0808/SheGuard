@@ -197,4 +197,7 @@
     <string name="helpline_num5_5">1985275286</string>
     <string name="helpline_num5_6">1852035634</string>
     <string name="helpline_num5_7">1517969150</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

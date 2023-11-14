@@ -3,6 +3,7 @@ package com.android.sheguard.ui.fragment;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.android.sheguard.R;
@@ -23,10 +25,12 @@ import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
 import com.android.sheguard.databinding.FragmentHomeBinding;
 import com.android.sheguard.service.SosService;
+import com.android.sheguard.ui.activity.LoginRegisterActivity;
 import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.util.AppUtil;
 import com.android.sheguard.util.FirebaseUtil;
 import com.android.sheguard.util.SosUtil;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -49,6 +53,8 @@ public class HomeFragment extends Fragment {
         binding.header.collapsingToolbar.setTitle(getString(R.string.activity_home_title));
         binding.header.collapsingToolbar.setSubtitle(getString(R.string.activity_home_desc, getString(R.string.unknown_user)));
         setUserNameOnTitle();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_nav_drawer);
 
         NotificationManager notificationManager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationChannel channel1 = new NotificationChannel(getString(R.string.notification_channel_push), getString(R.string.notification_channel_push), NotificationManager.IMPORTANCE_HIGH);
@@ -96,16 +102,42 @@ public class HomeFragment extends Fragment {
             updateButtonText();
         });
 
-        binding.profile.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment));
         binding.contacts.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_contactsFragment));
         binding.helpline.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_helplineFragment));
         binding.safetyTips.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_safetyTipsFragment));
-        binding.settings.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_settingsFragment));
         binding.about.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_aboutFragment));
 
         FirebaseUtil.updateToken();
 
+        initializeDrawerItems();
+
         return view;
+    }
+
+    private void initializeDrawerItems() {
+        ((NavigationView) requireActivity().findViewById(R.id.navView)).setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            NavOptions navOptions = new NavOptions.Builder()
+                    .setEnterAnim(0)
+                    .setExitAnim(0)
+                    .setPopEnterAnim(R.anim.slide_out)
+                    .setPopExitAnim(R.anim.fade_in)
+                    .build();
+
+            if (id == R.id.nav_profile) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_homeFragment_to_profileFragment, null, navOptions);
+            } else if (id == R.id.nav_settings) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_homeFragment_to_settingsFragment, null, navOptions);
+            } else if (id == R.id.nav_logout) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), LoginRegisterActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
+            ((MainActivity) requireActivity()).toggleDrawer();
+            return true;
+        });
     }
 
     public void setUserNameOnTitle() {
@@ -159,6 +191,4 @@ public class HomeFragment extends Fragment {
             }
         }
     });
-
-
 }

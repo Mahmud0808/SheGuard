@@ -2,7 +2,6 @@ package com.android.sheguard.ui.fragment;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -24,7 +23,6 @@ import com.android.sheguard.R;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.databinding.FragmentProfileBinding;
 import com.android.sheguard.model.UserModel;
-import com.android.sheguard.ui.activity.LoginRegisterActivity;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -71,13 +69,6 @@ public class ProfileFragment extends Fragment {
         getCurrentLocation();
 
         binding.btnEditProfile.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_editProfileFragment));
-
-        binding.btnLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(getContext(), LoginRegisterActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        });
 
         return view;
     }

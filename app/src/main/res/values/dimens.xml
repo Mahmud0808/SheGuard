@@ -6,4 +6,5 @@
     <dimen name="margin_24">24dp</dimen>
     <dimen name="padding_30">30dp</dimen>
     <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
 </resources>
