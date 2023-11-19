@@ -42,6 +42,8 @@ You need to have [Android Studio Giraffe or above](https://developer.android.com
 
 ## Getting Started 🚀
 
+- In Android Studio project, go to Tools > Firebase > setup firebase integration.
+
 - Enable [Cloud Messaging](https://console.cloud.google.com/apis/library/googlecloudmessaging.googleapis.com) API library
 
 - Enable [Token Service API](https://console.cloud.google.com/apis/library/securetoken.googleapis.com)
