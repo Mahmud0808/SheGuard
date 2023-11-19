@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.sheguard.R;
+import com.android.sheguard.SheGuard;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
 import com.android.sheguard.databinding.FragmentContactsBinding;
@@ -54,7 +55,7 @@ public class ContactsFragment extends Fragment {
                     contacts.remove(idx);
                     adapter.notifyDataSetChanged();
 
-                    Gson gson = new Gson();
+                    Gson gson = SheGuard.GSON;
                     String jsonContacts = gson.toJson(contacts);
                     Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
 
@@ -91,7 +92,7 @@ public class ContactsFragment extends Fragment {
         tvEmptyList = view.findViewById(R.id.tv_empty_list);
 
         contacts = new ArrayList<>();
-        Gson gson = new Gson();
+        Gson gson = SheGuard.GSON;
         String jsonContacts = Prefs.getString(Constants.CONTACTS_LIST, "");
         if (!jsonContacts.isEmpty()) {
             Type type = new TypeToken<List<ContactModel>>() {

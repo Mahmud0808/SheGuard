@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.sheguard.R;
+import com.android.sheguard.SheGuard;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
 import com.android.sheguard.model.ContactModel;
@@ -70,7 +71,7 @@ public class NewContactAdapter extends RecyclerView.Adapter<NewContactAdapter.Vi
             ContactsFragment.contacts.add(new ContactModel(name, number));
             ContactsFragment.adapter.notifyDataSetChanged();
 
-            Gson gson = new Gson();
+            Gson gson = SheGuard.GSON;
             String jsonContacts = gson.toJson(ContactsFragment.contacts);
             Prefs.putString(Constants.CONTACTS_LIST, jsonContacts);
 

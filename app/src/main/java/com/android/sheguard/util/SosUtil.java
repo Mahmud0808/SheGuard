@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.android.sheguard.R;
+import com.android.sheguard.SheGuard;
 import com.android.sheguard.api.NotificationAPI;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
@@ -145,7 +146,7 @@ public class SosUtil {
         }
 
         ArrayList<ContactModel> contacts = new ArrayList<>();
-        Gson gson = new Gson();
+        Gson gson = SheGuard.GSON;
         String jsonContacts = Prefs.getString(Constants.CONTACTS_LIST, "");
 
         if (Prefs.getBoolean(Constants.SETTINGS_CALL_EMERGENCY_SERVICE, false) && !calledEmergency) {
