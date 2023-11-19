@@ -16,7 +16,7 @@
                 app:motionTarget="@id/skipBtn" />
 
             <KeyAttribute
-                android:translationX="-100dp"
+                android:translationX="-500dp"
                 app:framePosition="100"
                 app:motionTarget="@id/skipBtn" />
 
@@ -78,7 +78,7 @@
             android:id="@id/skipBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="-100dp"
+            android:translationX="-500dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
