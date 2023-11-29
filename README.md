@@ -42,13 +42,20 @@ You need to have [Android Studio Giraffe or above](https://developer.android.com
 
 ## Getting Started 🚀
 
-- In Android Studio project, go to Tools > Firebase > setup firebase integration.
+- In Android Studio project, go to `Tools` > `Firebase` > `Authentication` > `Authenticate using a custom authentication system`:
+  - First, `Connect to Firebase`
+  - After that, `Add the Firebase Authentication SDK to your app`
+
+- Now open your project's [Firebase Console](https://console.firebase.google.com/) > `Authentication` > `Sign-in method`:
+  - Enable `Email/Password`
+  - Do not enable `Email link (passwordless sign-in)`
 
 - Enable [Cloud Messaging](https://console.cloud.google.com/apis/library/googlecloudmessaging.googleapis.com) API library
 
 - Enable [Token Service API](https://console.cloud.google.com/apis/library/securetoken.googleapis.com)
 
-- Open your project's **Firebase console**, click on **Settings icon** beside Project Overview and then go to **Users and permissions**. Next click on **Cloud Messaging** tab, copy the **Server Key** of Cloud Messaging API and paste it in [NotificationAPI.java](https://github.com/Mahmud0808/SheGuard/blob/master/app/src/main/java/com/android/sheguard/api/NotificationAPI.java)
+- Again, Open your project's [Firebase Console](https://console.firebase.google.com/) > `Settings icon` (beside Project Overview) > `Users and permissions` > `Cloud Messaging`:
+  - Copy the `Server Key` of Cloud Messaging API and paste it in [NotificationAPI.java](https://github.com/Mahmud0808/SheGuard/blob/master/app/src/main/java/com/android/sheguard/api/NotificationAPI.java)
 
 - That's it. Now you are good to go!
 
