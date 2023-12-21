@@ -1,5 +1,6 @@
 package com.android.sheguard.ui.core;
 
+import android.content.res.Configuration;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -23,6 +24,10 @@ public class Transform {
 
     public static void setParallaxTransformation(View page, float position) {
         ImageView parallaxView = page.findViewById(R.id.img);
+        boolean isLandscape = page.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (isLandscape) return;
+
         if (position < -1) {
             // This page is way off-screen to the left.
             page.setAlpha(1f);
