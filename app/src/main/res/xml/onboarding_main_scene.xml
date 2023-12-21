@@ -26,7 +26,7 @@
                 app:motionTarget="@id/nextBtn" />
 
             <KeyAttribute
-                android:translationX="100dp"
+                android:translationX="500dp"
                 app:framePosition="100"
                 app:motionTarget="@id/nextBtn" />
 
@@ -95,7 +95,7 @@
             android:id="@id/nextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="100dp"
+            android:translationX="500dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
