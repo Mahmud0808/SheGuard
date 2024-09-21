@@ -1,4 +1,4 @@
-package com.android.sheguard.util;
+package com.android.sheguard.network;
 
 @SuppressWarnings("unused")
 public class NotificationResponse {

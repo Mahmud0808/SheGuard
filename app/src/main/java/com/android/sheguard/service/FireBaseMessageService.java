@@ -33,7 +33,7 @@ public class FireBaseMessageService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        if (remoteMessage.getData().size() == 0) {
+        if (remoteMessage.getData().isEmpty()) {
             return;
         }
 

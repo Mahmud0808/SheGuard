@@ -17,6 +17,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application
         android:name=".SheGuard"
@@ -48,11 +50,14 @@
 
         <service
             android:name=".service.SosService"
-            android:enabled="true" />
+            android:enabled="true"
+            android:foregroundServiceType="specialUse" />
         <service
             android:name=".service.FireBaseMessageService"
             android:directBootAware="true"
-            android:exported="true">
+            android:exported="true"
+            android:foregroundServiceType="remoteMessaging"
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

@@ -1,22 +1,17 @@
 package com.android.sheguard.api;
 
 import com.android.sheguard.model.NotificationSenderModel;
-import com.android.sheguard.util.NotificationResponse;
+import com.android.sheguard.network.NotificationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface NotificationAPI {
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-                    "Authorization:key=XXXXXXXXXXXXXXXXXXXXXXXXXXXX" // Replace with your server key from Firebase Console
-            }
-    )
-
-    @POST("fcm/send")
-    Call<NotificationResponse> sendNotification(@Body NotificationSenderModel body);
+    @Headers("Content-Type:application/json")
+    @POST("v1/projects/YOUR_PROJECT_ID/messages:send") // TODO: Replace with your own firebase project id
+    Call<NotificationResponse> sendNotification(@Header("Authorization") String authHeader, @Body NotificationSenderModel body);
 }

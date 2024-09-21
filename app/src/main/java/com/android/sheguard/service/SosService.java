@@ -33,11 +33,9 @@ import com.android.sheguard.api.NotificationAPI;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
 import com.android.sheguard.model.ContactModel;
-import com.android.sheguard.model.NotificationDataModel;
-import com.android.sheguard.model.NotificationSenderModel;
 import com.android.sheguard.ui.activity.MainActivity;
-import com.android.sheguard.util.NotificationClient;
-import com.android.sheguard.util.NotificationResponse;
+import com.android.sheguard.util.FirebaseUtil;
+import com.android.sheguard.network.NotificationClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -53,10 +51,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class SosService extends Service implements SensorEventListener {
@@ -235,7 +229,7 @@ public class SosService extends Service implements SensorEventListener {
                                 LocationServices.getFusedLocationProviderClient(SosService.this)
                                         .removeLocationUpdates(this);
 
-                                if (locationResult.getLocations().size() > 0) {
+                                if (!locationResult.getLocations().isEmpty()) {
                                     int idx = locationResult.getLocations().size() - 1;
                                     double latitude = locationResult.getLocations().get(idx).getLatitude();
                                     double longitude = locationResult.getLocations().get(idx).getLongitude();
@@ -316,21 +310,9 @@ public class SosService extends Service implements SensorEventListener {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static void sendNotification(String userToken, String title, String message) {
-        NotificationDataModel data = new NotificationDataModel(title, message);
-        NotificationSenderModel sender = new NotificationSenderModel(data, userToken);
-
-        notificationApiService.sendNotification(sender).enqueue(new Callback<NotificationResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<NotificationResponse> call, @NonNull Response<NotificationResponse> response) {
-                Log.i("SOS", "sendNotification: " + response.message());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<NotificationResponse> call, @NonNull Throwable t) {
-                Log.i("SOS", "sendNotification: " + t.getMessage());
-            }
-        });
+        new FirebaseUtil.SendNotificationTask(notificationApiService, userToken, title, message).execute();
     }
 
     private void callEmergency() {
@@ -356,7 +338,7 @@ public class SosService extends Service implements SensorEventListener {
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("SOS", "playSiren error: " + e.getMessage(), e);
         }
     }
 

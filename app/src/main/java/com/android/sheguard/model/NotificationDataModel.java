@@ -1,6 +1,5 @@
 package com.android.sheguard.model;
 
-@SuppressWarnings("unused")
 public class NotificationDataModel {
 
     private String title;
