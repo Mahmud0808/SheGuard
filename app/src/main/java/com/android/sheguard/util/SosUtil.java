@@ -139,6 +139,8 @@ public class SosUtil {
             return;
         }
 
+        resetValues();
+
         ArrayList<ContactModel> contacts = new ArrayList<>();
         Gson gson = SheGuard.GSON;
         String jsonContacts = Prefs.getString(Constants.CONTACTS_LIST, "");
