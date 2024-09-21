@@ -1,4 +1,4 @@
-package com.android.sheguard.network;
+package com.android.sheguard.util;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,4 +1,4 @@
-package com.android.sheguard.auth;
+package com.android.sheguard.api;
 
 import android.content.Context;
 

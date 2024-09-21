@@ -35,7 +35,7 @@ import com.android.sheguard.config.Prefs;
 import com.android.sheguard.model.ContactModel;
 import com.android.sheguard.ui.activity.MainActivity;
 import com.android.sheguard.util.FirebaseUtil;
-import com.android.sheguard.network.NotificationClient;
+import com.android.sheguard.util.NotificationClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;

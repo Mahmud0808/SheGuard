@@ -6,13 +6,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.android.sheguard.SheGuard;
-import com.android.sheguard.auth.MyFirebaseAuth;
+import com.android.sheguard.api.MyFirebaseAuth;
 import com.android.sheguard.api.NotificationAPI;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.model.NotificationDataModel;
 import com.android.sheguard.model.NotificationSenderModel;
 import com.android.sheguard.model.NotificationTokenModel;
-import com.android.sheguard.network.NotificationResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;

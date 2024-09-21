@@ -24,7 +24,6 @@ import com.android.sheguard.api.NotificationAPI;
 import com.android.sheguard.common.Constants;
 import com.android.sheguard.config.Prefs;
 import com.android.sheguard.model.ContactModel;
-import com.android.sheguard.network.NotificationClient;
 import com.android.sheguard.service.SosService;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;

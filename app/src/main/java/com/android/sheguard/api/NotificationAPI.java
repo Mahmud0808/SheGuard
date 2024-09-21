@@ -1,7 +1,7 @@
 package com.android.sheguard.api;
 
 import com.android.sheguard.model.NotificationSenderModel;
-import com.android.sheguard.network.NotificationResponse;
+import com.android.sheguard.util.NotificationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
