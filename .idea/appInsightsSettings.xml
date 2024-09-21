@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.android.sheguard" />
+                  <option name="mobileSdkAppId" value="1:363239062777:android:c1ce9acb52824dad403628" />
+                  <option name="projectId" value="sheguard-08" />
+                  <option name="projectNumber" value="363239062777" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
