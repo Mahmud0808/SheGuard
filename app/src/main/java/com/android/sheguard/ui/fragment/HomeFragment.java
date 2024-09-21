@@ -111,6 +111,10 @@ public class HomeFragment extends Fragment {
 
         initializeDrawerItems();
 
+        if (!AppUtil.permissionsGranted(getContext())) {
+            multiplePermissions.launch(AppUtil.REQUIRED_PERMISSIONS);
+        }
+
         return view;
     }
 
