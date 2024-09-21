@@ -50,12 +50,13 @@ You need to have [Android Studio Giraffe or above](https://developer.android.com
   - Enable `Email/Password`
   - Do not enable `Email link (passwordless sign-in)`
 
-- Enable [Cloud Messaging](https://console.cloud.google.com/apis/library/googlecloudmessaging.googleapis.com) API library
-
 - Enable [Token Service API](https://console.cloud.google.com/apis/library/securetoken.googleapis.com)
 
-- Again, Open your project's [Firebase Console](https://console.firebase.google.com/) > `Settings icon` (beside Project Overview) > `Users and permissions` > `Cloud Messaging`:
-  - Copy the `Server Key` of Cloud Messaging API and paste it in [NotificationAPI.java](https://github.com/Mahmud0808/SheGuard/blob/master/app/src/main/java/com/android/sheguard/api/NotificationAPI.java)
+- After that, go to your project's [Firebase Console](https://console.firebase.google.com/) > `Settings icon` (beside Project Overview) > `Project Settings` > `Service accounts`:
+  - Generate new private key, rename the key to `service_account.json` and paste the file in [/res/raw](https://github.com/Mahmud0808/SheGuard/tree/master/app/src/main/res/raw)
+
+- Open the `service_account.json` file:
+  - Copy the `project_id` of your private key and paste it in [NotificationAPI.java](https://github.com/Mahmud0808/SheGuard/blob/master/app/src/main/java/com/android/sheguard/api/NotificationAPI.java)
 
 - That's it. Now you are good to go!
 
