@@ -13,8 +13,6 @@ android {
         targetSdk 35
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -40,36 +38,33 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-auth:22.3.0'
-    implementation 'com.google.firebase:firebase-firestore:24.10.0'
-    implementation 'androidx.navigation:navigation-fragment:2.7.6'
-    implementation 'androidx.navigation:navigation-ui:2.7.6'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.firebase.auth
+    implementation libs.firebase.firestore
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.ui
+    implementation(platform(libs.kotlin.bom))
 
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-database:20.3.0'
-    implementation 'com.google.firebase:firebase-firestore:24.10.0'
-    implementation 'com.google.firebase:firebase-messaging-directboot:23.4.0'
-    implementation 'com.google.firebase:firebase-messaging:23.0.0'
-    implementation 'com.google.auth:google-auth-library-oauth2-http:1.3.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation(platform(libs.firebase.bom))
+    implementation libs.firebase.messaging
+    implementation libs.firebase.analytics
+    implementation libs.firebase.database
+    implementation libs.firebase.firestore
+    implementation libs.firebase.messaging.directboot
+    implementation libs.google.firebase.messaging
+    implementation libs.google.auth.library.oauth2.http
+    implementation libs.retrofit
+    implementation libs.converter.gson
 
-    implementation 'com.tbuonomo:dotsindicator:4.3'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
-    implementation 'com.google.android.gms:play-services-maps:18.2.0'
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.5.0"
+    implementation libs.dotsindicator
+    implementation libs.gson
+    implementation libs.circleimageview
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.androidx.viewpager2
+    implementation libs.play.services.maps
+    implementation libs.play.services.location
+    implementation libs.collapsingtoolbarlayout.subtitle
 }
