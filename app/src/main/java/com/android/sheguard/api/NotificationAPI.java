@@ -12,6 +12,6 @@ import retrofit2.http.POST;
 public interface NotificationAPI {
 
     @Headers("Content-Type:application/json")
-    @POST("v1/projects/YOUR_PROJECT_ID/messages:send") // TODO: Replace with your own firebase project id
+    @POST("v1/projects/sheguard-be3c9/messages:send") // TODO: Replace with your own firebase project id
     Call<NotificationResponse> sendNotification(@Header("Authorization") String authHeader, @Body NotificationSenderModel body);
 }
